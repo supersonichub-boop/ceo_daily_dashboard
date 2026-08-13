@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Plan - 7 Days Overview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: 'Prompt', 'Inter', sans-serif; background-color: #f8fafc; }
+    .print-hide { display: block; }
+    @media print {
+      .print-hide { display: none !important; }
+      body { background-color: white; padding: 0; }
+      .page-container { shadow: none; padding: 0; max-width: 100% !important; }
+    }
+  </style>
+</head>
+<body class="p-4 md:p-8 text-slate-800">
+
+  <!-- แถบเมนูด้านบนสำหรับสลับหน้า -->
+  <!-- <div class="max-w-[1450px] mx-auto mb-6 flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200 print-hide">
+    <div class="flex items-center space-x-3">
+      <div class="bg-indigo-600 text-white p-2.5 rounded-xl font-bold">
+        <i class="fa-solid fa-calendar-week"></i>
+      </div>
+      <div>
+        <h1 class="font-bold text-slate-800 text-lg">System Management</h1>
+        <p class="text-xs text-slate-500">เลือกหน้าที่ต้องการรับชม</p>
+      </div>
+    </div>
+    <div class="flex items-center space-x-3">
+      <a href="index.html" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-semibold transition flex items-center gap-2">
+        <i class="fa-solid fa-chart-pie"></i> CEO Dashboard
+      </a>
+      <a href="weekly-plan.html" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-semibold shadow-sm flex items-center gap-2">
+        <i class="fa-solid fa-table-cells"></i> Weekly Plan
+      </a>
+      <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-sm font-semibold transition flex items-center gap-2">
+        <i class="fa-solid fa-print"></i> พิมพ์ / PDF
+      </button>
+    </div>
+  </div> -->
+
+  <!-- โครงสร้างหลัก Weekly Plan -->
+  <div class="max-w-[1450px] mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-200 page-container">
+    
+    <!-- HEADER -->
+    <div class="text-center mb-8 relative">
+      <h1 class="text-3xl md:text-4xl  font-extrabold tracking-tight text-slate-900 uppercase">
+        WEEKLY PLAN – 7 DAYS OVERVIEW
+       
+      </h1>
+       <a href="index.html" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-semibold transition flex items-center gap-2">
+        <i class="fa-solid fa-chart-pie"></i> CEO Dashboard
+      </a>
+      <div class="flex items-center justify-center gap-3 mt-2 text-slate-600 font-medium text-sm md:text-base">
+        <span>วางแผนชีวิต</span>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+        <span>บริหารเวลา</span>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+        <span>สร้างผลลัพธ์</span>
+      </div>
+      <div class="w-32 h-1 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <!-- 7 DAYS GRID -->
+    <div class="grid grid-cols-1 md:grid-cols-7 gap-3">
+      
+      <!-- วันจันทร์ -->
+      <div class="border-2 border-amber-300 bg-amber-50/20 rounded-2xl p-3 flex flex-col justify-between">
+        <div>
+          <div class="bg-amber-100/80 rounded-xl p-3 text-center mb-4 border border-amber-200">
+            <div class="text-amber-700 font-bold text-base">วันจันทร์</div>
+            <div class="text-amber-800 font-extrabold text-sm tracking-wider">DESIGN DAY</div>
+            <div class="text-2xl mt-1">🎨</div>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="bg-white p-2.5 rounded-xl border border-amber-200/60 shadow-sm">
+              <div class="font-bold text-amber-700 mb-1">08.30 - 10.00 <span class="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded ml-1">MORNING</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
+                <li>ตอบเรื่องเร่งด่วน</li>
+                <li>จัดลำดับงานวันนี้</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-amber-200/60 shadow-sm">
+              <div class="font-bold text-amber-700 mb-1">10.00 - 11.00</div>
+              <div class="text-slate-600">🚿 อาบน้ำ</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-amber-200/60 shadow-sm">
+              <div class="font-bold text-amber-700 mb-1">11.00 - 13.00</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>Nuzen Studio</li>
+                <li>Design Direction</li>
+                <li>Concept Design</li>
+                <li>Review งานออกแบบ</li>
+                <li>พัฒราบริการใหม่</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-amber-200/60 shadow-sm">
+              <div class="font-bold text-amber-700 mb-1">13.00 - 14.00</div>
+              <div class="text-slate-600">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-amber-200/60 shadow-sm">
+              <div class="font-bold text-amber-700 mb-1">14.00 - 15.00 <span class="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded ml-1">AFTERNOON</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ประชุม / ติดตามทีม</li>
+                <li>โทรศัพท์ / อนุมัตินามงาน</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-amber-200/60 shadow-sm">
+              <div class="font-bold text-amber-700 mb-1">15.00 - 17.00</div>
+              <div class="text-slate-600">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ (งานเฉพาะฉุกเฉินเท่านั้น)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-amber-200/60 shadow-sm">
+              <div class="font-bold text-amber-700 mb-1">17.00 - 19.00 <span class="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded ml-1">EVENING</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ตรวจงาน / อ่านเอกสาร</li>
+                <li>ตอบแชท / วางแผนวันถัดไป</li>
+                <li><span class="font-semibold text-amber-800">Focus: ปรับปรุงระบบบริษัท</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- ช่วงกลางคืน Routine -->
+        <div class="mt-3 space-y-1.5 text-[11px] pt-3 border-t border-amber-200">
+          <div class="bg-amber-100/50 p-1.5 rounded text-amber-900 font-semibold flex justify-between">
+            <span>19.00 - 19.30</span> <span>🎓 เรียน ENG Online</span>
+          </div>
+          <div class="bg-amber-100/50 p-1.5 rounded text-amber-900 font-semibold flex justify-between">
+            <span>19.30 - 21.00</span> <span>📖 อ่านหนังสือ / Youtube</span>
+          </div>
+          <div class="bg-amber-100/50 p-1.5 rounded text-amber-900 font-semibold flex justify-between">
+            <span>21.00 - 21.45</span> <span>🛁 อาบน้ำ</span>
+          </div>
+          <div class="bg-amber-100/50 p-1.5 rounded text-amber-900 font-semibold flex justify-between">
+            <span>21.45 - 22.00</span> <span>🛌 เตรียมตัวนอน</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- วันอังคาร -->
+      <div class="border-2 border-rose-300 bg-rose-50/20 rounded-2xl p-3 flex flex-col justify-between">
+        <div>
+          <div class="bg-rose-100/80 rounded-xl p-3 text-center mb-4 border border-rose-200">
+            <div class="text-rose-700 font-bold text-base">วันอังคาร</div>
+            <div class="text-rose-800 font-extrabold text-sm tracking-wider">CONSTRUCTION DAY</div>
+            <div class="text-2xl mt-1">🏗️</div>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="bg-white p-2.5 rounded-xl border border-rose-200/60 shadow-sm">
+              <div class="font-bold text-rose-700 mb-1">08.30 - 10.00 <span class="text-[10px] bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded ml-1">MORNING</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
+                <li>ตอบเรื่องเร่งด่วน</li>
+                <li>จัดลำดับงานวันนี้</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-rose-200/60 shadow-sm">
+              <div class="font-bold text-rose-700 mb-1">10.00 - 11.00</div>
+              <div class="text-slate-600">🚿 อาบน้ำ</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-rose-200/60 shadow-sm">
+              <div class="font-bold text-rose-700 mb-1">11.00 - 13.00</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>Quiet Force</li>
+                <li>Site Review</li>
+                <li>Cost Control</li>
+                <li>Quality Control</li>
+                <li>ตรวจปัญหาโครงการ</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-rose-200/60 shadow-sm">
+              <div class="font-bold text-rose-700 mb-1">13.00 - 14.00</div>
+              <div class="text-slate-600">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-rose-200/60 shadow-sm">
+              <div class="font-bold text-rose-700 mb-1">14.00 - 15.00 <span class="text-[10px] bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded ml-1">AFTERNOON</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ประชุม / ติดตามทีม</li>
+                <li>โทรศัพท์ / อนุมัตินามงาน</li>
+                <li><span class="font-semibold text-rose-800">Focus: ติดตามโฟร์แมน</span></li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-rose-200/60 shadow-sm">
+              <div class="font-bold text-rose-700 mb-1">15.00 - 17.00</div>
+              <div class="text-slate-600">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ (งานเฉพาะฉุกเฉินเท่านั้น)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-rose-200/60 shadow-sm space-y-2">
+              <div>
+                <div class="font-bold text-rose-700">17.00 - 17.20</div>
+                <div class="text-slate-600">ตรวจงาน / อ่านเอกสาร / ตอบแชท</div>
+              </div>
+              <div class="border-t border-rose-100 pt-1.5">
+                <div class="font-bold text-rose-700">17.20 - 18.40</div>
+                <div class="text-slate-600">🏃‍♂️ เดินออกกำลังกาย</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ช่วงกลางคืน Routine -->
+        <div class="mt-3 space-y-1.5 text-[11px] pt-3 border-t border-rose-200">
+          <div class="bg-rose-100/50 p-1.5 rounded text-rose-900 font-semibold flex justify-between">
+            <span>19.00 - 19.30</span> <span>🎓 เรียน ENG Online</span>
+          </div>
+          <div class="bg-rose-100/50 p-1.5 rounded text-rose-900 font-semibold flex justify-between">
+            <span>19.30 - 21.00</span> <span>🎥 ทำข้อมูลผ่าน Youtube</span>
+          </div>
+          <div class="bg-rose-100/50 p-1.5 rounded text-rose-900 font-semibold flex justify-between">
+            <span>21.00 - 21.45</span> <span>🛁 อาบน้ำ</span>
+          </div>
+          <div class="bg-rose-100/50 p-1.5 rounded text-rose-900 font-semibold flex justify-between">
+            <span>21.45 - 22.00</span> <span>🛌 เตรียมตัวนอน</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- วันพุธ -->
+      <div class="border-2 border-emerald-300 bg-emerald-50/20 rounded-2xl p-3 flex flex-col justify-between">
+        <div>
+          <div class="bg-emerald-100/80 rounded-xl p-3 text-center mb-4 border border-emerald-200">
+            <div class="text-emerald-700 font-bold text-base">วันพุธ</div>
+            <div class="text-emerald-800 font-extrabold text-sm tracking-wider">MONEY DAY</div>
+            <div class="text-2xl mt-1">💰</div>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="bg-white p-2.5 rounded-xl border border-emerald-200/60 shadow-sm">
+              <div class="font-bold text-emerald-700 mb-1">08.30 - 10.00 <span class="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded ml-1">MORNING</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
+                <li>ตอบเรื่องเร่งด่วน</li>
+                <li>จัดลำดับงานวันนี้</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-emerald-200/60 shadow-sm">
+              <div class="font-bold text-emerald-700 mb-1">10.00 - 11.00</div>
+              <div class="text-slate-600">🚿 อาบน้ำ</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-emerald-200/60 shadow-sm">
+              <div class="font-bold text-emerald-700 mb-1">11.00 - 13.00</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>การเงินทั้งหมด</li>
+                <li>Cash Flow</li>
+                <li>รายรับรายจ่าย</li>
+                <li>หนี้สิน / งบการเงิน</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-emerald-200/60 shadow-sm">
+              <div class="font-bold text-emerald-700 mb-1">13.00 - 14.00</div>
+              <div class="text-slate-600">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-emerald-200/60 shadow-sm">
+              <div class="font-bold text-emerald-700 mb-1">14.00 - 15.00 <span class="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded ml-1">AFTERNOON</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ประชุม / ติดตามทีม</li>
+                <li>โทรศัพท์ / อนุมัตินามงาน</li>
+                <li><span class="font-semibold text-emerald-800">Focus: การลงทุน (หุ้นไทย/ต่างประเทศ, Bitcoin/Asset Allocation)</span></li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-emerald-200/60 shadow-sm">
+              <div class="font-bold text-emerald-700 mb-1">15.00 - 17.00</div>
+              <div class="text-slate-600">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ (งานเฉพาะฉุกเฉินเท่านั้น)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-emerald-200/60 shadow-sm">
+              <div class="font-bold text-emerald-700 mb-1">17.00 - 19.00 <span class="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded ml-1">EVENING</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ตรวจงาน / อ่านเอกสาร</li>
+                <li>ตอบแชท / วางแผนวันถัดไป</li>
+                <li><span class="font-semibold text-emerald-800">Focus: ปรับปรุงระบบบริษัท</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- ช่วงกลางคืน Routine -->
+        <div class="mt-3 space-y-1.5 text-[11px] pt-3 border-t border-emerald-200">
+          <div class="bg-emerald-100/50 p-1.5 rounded text-emerald-900 font-semibold flex justify-between">
+            <span>19.00 - 19.30</span> <span>🎓 เรียน ENG Online</span>
+          </div>
+          <div class="bg-emerald-100/50 p-1.5 rounded text-emerald-900 font-semibold flex justify-between">
+            <span>19.30 - 21.00</span> <span>🎥 ทำข้อมูลผ่าน Youtube</span>
+          </div>
+          <div class="bg-emerald-100/50 p-1.5 rounded text-emerald-900 font-semibold flex justify-between">
+            <span>21.00 - 21.45</span> <span>🛁 อาบน้ำ</span>
+          </div>
+          <div class="bg-emerald-100/50 p-1.5 rounded text-emerald-900 font-semibold flex justify-between">
+            <span>21.45 - 22.00</span> <span>🛌 เตรียมตัวนอน</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- วันพฤหัสบดี -->
+      <div class="border-2 border-orange-300 bg-orange-50/20 rounded-2xl p-3 flex flex-col justify-between">
+        <div>
+          <div class="bg-orange-100/80 rounded-xl p-3 text-center mb-4 border border-orange-200">
+            <div class="text-orange-700 font-bold text-base">วันพฤหัสบดี</div>
+            <div class="text-orange-800 font-extrabold text-sm tracking-wider">GROWTH DAY</div>
+            <div class="text-2xl mt-1">📈</div>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="bg-white p-2.5 rounded-xl border border-orange-200/60 shadow-sm">
+              <div class="font-bold text-orange-700 mb-1">08.30 - 10.00 <span class="text-[10px] bg-orange-100 text-orange-800 px-1.5 py-0.5 rounded ml-1">MORNING</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
+                <li>ตอบเรื่องเร่งด่วน</li>
+                <li>จัดลำดับงานวันนี้</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-orange-200/60 shadow-sm">
+              <div class="font-bold text-orange-700 mb-1">10.00 - 11.00</div>
+              <div class="text-slate-600">🚿 อาบน้ำ</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-orange-200/60 shadow-sm">
+              <div class="font-bold text-orange-700 mb-1">11.00 - 13.00</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ธุรกิจใหม่</li>
+                <li>Cafe Sandwich</li>
+                <li>Camp คนงาน</li>
+                <li>Parking / Land Development</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-orange-200/60 shadow-sm">
+              <div class="font-bold text-orange-700 mb-1">13.00 - 14.00</div>
+              <div class="text-slate-600">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-orange-200/60 shadow-sm">
+              <div class="font-bold text-orange-700 mb-1">14.00 - 15.00 <span class="text-[10px] bg-orange-100 text-orange-800 px-1.5 py-0.5 rounded ml-1">AFTERNOON</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ประชุม / ติดตามทีม</li>
+                <li>โทรศัพท์ / อนุมัตินามงาน</li>
+                <li><span class="font-semibold text-orange-800">Focus: คู่ค้า / นักลงทุน / พันธมิตร</span></li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-orange-200/60 shadow-sm">
+              <div class="font-bold text-orange-700 mb-1">15.00 - 17.00</div>
+              <div class="text-slate-600">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ (งานเฉพาะฉุกเฉินเท่านั้น)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-orange-200/60 shadow-sm space-y-2">
+              <div>
+                <div class="font-bold text-orange-700">17.00 - 17.20</div>
+                <div class="text-slate-600">ตรวจงาน / อ่านเอกสาร / ตอบแชท</div>
+              </div>
+              <div class="border-t border-orange-100 pt-1.5">
+                <div class="font-bold text-orange-700">17.20 - 18.40</div>
+                <div class="text-slate-600">🏃‍♂️ เดินออกกำลังกาย</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ช่วงกลางคืน Routine -->
+        <div class="mt-3 space-y-1.5 text-[11px] pt-3 border-t border-orange-200">
+          <div class="bg-orange-100/50 p-1.5 rounded text-orange-900 font-semibold flex justify-between">
+            <span>19.00 - 19.30</span> <span>🎓 เรียน ENG Online</span>
+          </div>
+          <div class="bg-orange-100/50 p-1.5 rounded text-orange-900 font-semibold flex justify-between">
+            <span>19.30 - 21.00</span> <span>📖 อ่านหนังสือ / Youtube</span>
+          </div>
+          <div class="bg-orange-100/50 p-1.5 rounded text-orange-900 font-semibold flex justify-between">
+            <span>21.00 - 21.45</span> <span>🛁 อาบน้ำ</span>
+          </div>
+          <div class="bg-orange-100/50 p-1.5 rounded text-orange-900 font-semibold flex justify-between">
+            <span>21.45 - 22.00</span> <span>🛌 เตรียมตัวนอน</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- วันศุกร์ -->
+      <div class="border-2 border-sky-300 bg-sky-50/20 rounded-2xl p-3 flex flex-col justify-between">
+        <div>
+          <div class="bg-sky-100/80 rounded-xl p-3 text-center mb-4 border border-sky-200">
+            <div class="text-sky-700 font-bold text-base">วันศุกร์</div>
+            <div class="text-sky-800 font-extrabold text-sm tracking-wider">OWNER DAY</div>
+            <div class="text-2xl mt-1">👑</div>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="bg-white p-2.5 rounded-xl border border-sky-200/60 shadow-sm">
+              <div class="font-bold text-sky-700 mb-1">08.30 - 10.00 <span class="text-[10px] bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded ml-1">MORNING</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
+                <li>ตอบเรื่องเร่งด่วน</li>
+                <li>จัดลำดับงานวันนี้</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-sky-200/60 shadow-sm">
+              <div class="font-bold text-sky-700 mb-1">10.00 - 11.00</div>
+              <div class="text-slate-600">🚿 อาบน้ำ</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-sky-200/60 shadow-sm">
+              <div class="font-bold text-sky-700 mb-1">11.00 - 13.00</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>เรื่องเจ้าของกิจการ</li>
+                <li>คดีความ / เอกสาร</li>
+                <li>ทนาย / หุ้นส่วน / ความเสี่ยง</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-sky-200/60 shadow-sm">
+              <div class="font-bold text-sky-700 mb-1">13.00 - 14.00</div>
+              <div class="text-slate-600">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-sky-200/60 shadow-sm">
+              <div class="font-bold text-sky-700 mb-1">14.00 - 15.00 <span class="text-[10px] bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded ml-1">AFTERNOON</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ประชุม / ติดตามทีม</li>
+                <li>โทรศัพท์ / อนุมัตินามงาน</li>
+                <li><span class="font-semibold text-sky-800">Focus: Review ทั้งสัปดาห์</span></li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-sky-200/60 shadow-sm">
+              <div class="font-bold text-sky-700 mb-1">15.00 - 17.00</div>
+              <div class="text-slate-600">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ (งานเฉพาะฉุกเฉินเท่านั้น)</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-sky-200/60 shadow-sm">
+              <div class="font-bold text-sky-700 mb-1">17.00 - 19.00 <span class="text-[10px] bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded ml-1">EVENING</span></div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ตรวจงาน / อ่านเอกสาร</li>
+                <li>ตอบแชท / วางแผนวันถัดไป</li>
+                <li><span class="font-semibold text-sky-800">Focus: ปรับปรุงระบบบริษัท</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- ช่วงกลางคืน Routine -->
+        <div class="mt-3 space-y-1.5 text-[11px] pt-3 border-t border-sky-200">
+          <div class="bg-sky-100/50 p-1.5 rounded text-sky-900 font-semibold flex justify-between">
+            <span>19.00 - 19.30</span> <span>🎓 เรียน ENG Online</span>
+          </div>
+          <div class="bg-sky-100/50 p-1.5 rounded text-sky-900 font-semibold flex justify-between">
+            <span>19.30 - 21.00</span> <span>📖 หาข้อมูลผ่าน Youtube</span>
+          </div>
+          <div class="bg-sky-100/50 p-1.5 rounded text-sky-900 font-semibold flex justify-between">
+            <span>21.00 - 21.45</span> <span>🛁 อาบน้ำ</span>
+          </div>
+          <div class="bg-sky-100/50 p-1.5 rounded text-sky-900 font-semibold flex justify-between">
+            <span>21.45 - 22.00</span> <span>🛌 เตรียมตัวนอน</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- วันเสาร์ -->
+      <div class="border-2 border-purple-300 bg-purple-50/20 rounded-2xl p-3 flex flex-col justify-between">
+        <div>
+          <div class="bg-purple-100/80 rounded-xl p-3 text-center mb-4 border border-purple-200">
+            <div class="text-purple-700 font-bold text-base">วันเสาร์</div>
+            <div class="text-purple-800 font-extrabold text-sm tracking-wider">FUTURE DAY</div>
+            <div class="text-2xl mt-1">🚀</div>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="bg-white p-2.5 rounded-xl border border-purple-200/60 shadow-sm">
+              <div class="font-bold text-purple-700 mb-1">07.00 - 08.30</div>
+              <div class="text-slate-600">🏃‍♂️ เดินออกกำลังกาย</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-purple-200/60 shadow-sm">
+              <div class="font-bold text-purple-700 mb-1">10.00 - 11.00</div>
+              <div class="text-slate-600">🚿 อาบน้ำ</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-purple-200/60 shadow-sm">
+              <div class="font-bold text-purple-700 mb-1">11.00 - 13.00</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ศึกษาการลงทุน</li>
+                <li>อสังหา / AI</li>
+                <li>ธุรกิจใหม่</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-purple-200/60 shadow-sm">
+              <div class="font-bold text-purple-700 mb-1">13.00 - 15.00</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ดูที่ดิน / ดูโครงการ</li>
+                <li>สำรวจโอกาส</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-purple-200/60 shadow-sm">
+              <div class="font-bold text-purple-700 mb-1">15.00 - 17.00</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li><span class="font-semibold text-purple-800">Personal Branding</span></li>
+                <li>Facebook / IG / Tiktok</li>
+                <li>ถ่ายรูป / Content / ENG</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-purple-200/60 shadow-sm">
+              <div class="font-bold text-purple-700 mb-1">17.00 - 19.00 <span class="text-[10px] bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded ml-1">EVENING</span></div>
+              <div class="text-slate-600">🍽️ พักผ่อน / ทานอาหารเย็นร่วมกับครอบครัว</div>
+            </div>
+          </div>
+        </div>
+        <!-- ช่วงกลางคืน Routine -->
+        <div class="mt-3 space-y-1.5 text-[11px] pt-3 border-t border-purple-200">
+          <div class="bg-purple-100/50 p-1.5 rounded text-purple-900 font-semibold flex justify-between">
+            <span>19.00 - 19.30</span> <span>🎓 เรียน ENG Online</span>
+          </div>
+          <div class="bg-purple-100/50 p-1.5 rounded text-purple-900 font-semibold flex justify-between">
+            <span>19.30 - 21.00</span> <span>📖 อ่านหนังสือ / Youtube</span>
+          </div>
+          <div class="bg-purple-100/50 p-1.5 rounded text-purple-900 font-semibold flex justify-between">
+            <span>21.00 - 21.45</span> <span>🛁 อาบน้ำ</span>
+          </div>
+          <div class="bg-purple-100/50 p-1.5 rounded text-purple-900 font-semibold flex justify-between">
+            <span>21.45 - 22.00</span> <span>🛌 เตรียมตัวนอน</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- วันอาทิตย์ -->
+      <div class="border-2 border-red-300 bg-red-50/20 rounded-2xl p-3 flex flex-col justify-between">
+        <div>
+          <div class="bg-red-100/80 rounded-xl p-3 text-center mb-4 border border-red-200">
+            <div class="text-red-700 font-bold text-base">วันอาทิตย์</div>
+            <div class="text-red-800 font-extrabold text-sm tracking-wider">RECOVERY DAY</div>
+            <div class="text-2xl mt-1">🌱</div>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="bg-white p-2.5 rounded-xl border border-red-200/60 shadow-sm">
+              <div class="font-bold text-red-700 mb-1">🌅 เช้า (Morning)</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ดู Youtube ความรู้</li>
+                <li>อาหารเช้า / กาแฟ</li>
+                <li>อ่านหนังสือ</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-red-200/60 shadow-sm">
+              <div class="font-bold text-red-700 mb-1">👨‍👩‍👧‍👦 กลางวัน (Midday)</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>ลูก / คนรัก</li>
+                <li>ญาติพี่น้อง</li>
+              </ul>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-red-200/60 shadow-sm">
+              <div class="font-bold text-red-700 mb-1">15.00 - 17.00</div>
+              <div class="text-slate-600">🚗 พักผ่อนตามอัธยาศัย</div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-red-200/60 shadow-sm">
+              <div class="font-bold text-red-700 mb-1">❤️ เย็น (Evening)</div>
+              <ul class="list-disc list-inside text-slate-600 space-y-0.5">
+                <li>เดินออกกำลังกาย</li>
+                <li>วางแผนสัปดาห์ 30 นาที</li>
+                <li>เตรียมเป้าหมายสัปดาห์ใหม่</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- ช่วงกลางคืน Routine -->
+        <div class="mt-3 space-y-1.5 text-[11px] pt-3 border-t border-red-200">
+          <div class="bg-red-100/50 p-1.5 rounded text-red-900 font-semibold flex justify-between">
+            <span>19.00 - 19.30</span> <span>🎓 เรียน ENG Online</span>
+          </div>
+          <div class="bg-red-100/50 p-1.5 rounded text-red-900 font-semibold flex justify-between">
+            <span>19.30 - 21.00</span> <span>📖 อ่านหนังสือ / Youtube</span>
+          </div>
+          <div class="bg-red-100/50 p-1.5 rounded text-red-900 font-semibold flex justify-between">
+            <span>21.00 - 21.45</span> <span>🛁 อาบน้ำ</span>
+          </div>
+          <div class="bg-red-100/50 p-1.5 rounded text-red-900 font-semibold flex justify-between">
+            <span>21.45 - 22.00</span> <span>🛌 เตรียมตัวนอน</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- KEY PRINCIPLES FOOTER -->
+    <div class="mt-8 pt-6 border-t border-slate-200">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+        <div class="bg-slate-900 text-white rounded-2xl p-4 text-center font-bold text-sm tracking-wider">
+          KEY PRINCIPLES
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex items-center gap-3">
+          <div class="text-2xl text-amber-600">⏰</div>
+          <div>
+            <div class="font-bold text-xs text-slate-800">เวลาทอง (08.30 - 13.00)</div>
+            <div class="text-[11px] text-slate-500">โฟกัสงานสำคัญที่สุด</div>
+          </div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex items-center gap-3">
+          <div class="text-2xl text-rose-600">👨‍👩‍👧‍👦</div>
+          <div>
+            <div class="font-bold text-xs text-slate-800">ครอบครัวอันดับ 1 (15.00 - 17.00)</div>
+            <div class="text-[11px] text-slate-500">อยู่กับครอบครัวเต็มที่</div>
+          </div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex items-center gap-3">
+          <div class="text-2xl text-indigo-600">📖</div>
+          <div>
+            <div class="font-bold text-xs text-slate-800">พัฒนาตัวเองทุกวัน (19.00 เป็นต้นไป)</div>
+            <div class="text-[11px] text-slate-500">เรียนรู้ / อ่านหนังสือ / วางแผน</div>
+          </div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex items-center gap-3">
+          <div class="text-2xl text-emerald-600">🎯</div>
+          <div>
+            <div class="font-bold text-xs text-slate-800">ทบทวนทุกวัน</div>
+            <div class="text-[11px] text-slate-500">วางแผน - ลงมือทำ - ปรับปรุง</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
