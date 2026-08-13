@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEO DAILY DASHBOARD</title>
+    <!-- Google Fonts: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        prompt: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            DEFAULT: '#0B1E36',
+                            light: '#162D4A',
+                            dark: '#061223'
+                        },
+                        dashGreen: '#217346',
+                        dashRed: '#9E1A1A',
+                        dashPurple: '#5A2A82',
+                        dashYellow: '#F39C12',
+                        dashBg: '#E9EEF3'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #E9EEF3;
+            color: #1a1a1a;
+            -webkit-print-color-adjust: exact;
+        }
+
+        /* Responsive Container */
+        .dashboard-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* Editable element hover effect */
+        [contenteditable="true"]:hover {
+            outline: 1px dashed #3b82f6;
+            background-color: rgba(239, 246, 255, 0.6);
+            border-radius: 2px;
+            cursor: text;
+        }
+        [contenteditable="true"]:focus {
+            outline: 2px solid #2563eb;
+            background-color: #ffffff;
+            border-radius: 2px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.03); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        .animate-pulse-glow {
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+
+        /* Custom Oval Highlight Circle (601,401.86) */
+        /* .highlight-oval {
+            border: 2.5px solid #217346;
+            border-radius: 50px;
+            padding: 1px 12px;
+            display: inline-block;
+            box-shadow: 0 0 4px rgba(33, 115, 70, 0.3);
+        } */
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Smooth Progress Bar Fill */
+        .progress-bar-fill {
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 min-h-screen">
+
+    <!-- Control Bar (Toolbar for user) -->
+    <!-- <div class="dashboard-container mb-3 flex flex-wrap justify-between items-center bg-white p-2.5 px-4 rounded-lg shadow-sm border border-slate-200 gap-2">
+        <div class="flex items-center gap-2">
+            <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+            <span class="text-xs sm:text-sm font-medium text-slate-700">โหมดการใช้งาน: <strong class="text-blue-600">แก้ไขข้อมูลได้สดๆ (Click to Edit)</strong></span>
+        </div>
+        <div class="flex gap-2 text-xs sm:text-sm">
+            <button onclick="saveDashboardData()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded transition shadow-sm flex items-center gap-1.5 font-medium">
+                <i class="fa-solid fa-floppy-disk"></i> บันทึกข้อมูล
+            </button>
+            <button onclick="resetDashboardData()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1.5 rounded transition font-medium">
+                <i class="fa-solid fa-rotate-left"></i> คืนค่าเดิม
+            </button>
+            <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded transition shadow-sm font-medium">
+                <i class="fa-solid fa-print"></i> พิมพ์ / PDF
+            </button>
+        </div>
+    </div> -->
+
+    <!-- MAIN DASHBOARD CARD -->
+    <div id="dashboard-content" class="dashboard-container bg-white rounded-xl shadow-xl overflow-hidden border border-slate-300 animate-fade-in">
+        
+        <!-- ================= 1. HEADER BAR ================= -->
+        <header class="bg-navy text-white p-3 sm:p-4 flex flex-col md:flex-row justify-between items-center gap-3 border-b-4 border-navy-dark">
+            <div class="flex items-center gap-3">
+                <h1 class="text-2xl sm:text-3xl font-bold tracking-wider" contenteditable="true">CEO DAILY DASHBOARD</h1>
+            </div>
+            <div class="text-sky-300 text-xs sm:text-sm font-light text-center md:text-left" contenteditable="true">
+                โฟกัสวันนี้ เพื่อผลลัพธ์ที่ยิ่งใหญ่ในอนาคต
+            </div>
+            <div class="bg-navy-light px-3 py-1.5 rounded-md border border-slate-600/50 flex items-center gap-2 text-sm sm:text-base font-semibold">
+                <i class="fa-regular fa-calendar-days text-sky-400"></i>
+                <span contenteditable="true">12 สิงหาคม 2569</span>
+            </div>
+        </header>
+
+        <!-- ================= 2. MAIN CONTENT GRID ================= -->
+        <div class="p-3 sm:p-4 grid grid-cols-1 lg:grid-cols-12 gap-3.5 bg-[#E9EEF3]">
+            
+            <!-- ================= LEFT COLUMN (3/12) ================= -->
+            <div class="lg:col-span-3 flex flex-col gap-3.5">
+                
+                <!-- CASH & LIQUIDITY -->
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+                    <div class="bg-dashGreen text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-wallet"></i>
+                        <span contenteditable="true">CASH & LIQUIDITY</span>
+                    </div>
+                    <div class="p-3 text-xs sm:text-sm flex flex-col gap-2.5">
+                        <div class="flex justify-between items-center pb-1 border-b border-slate-100">
+                            <span class="text-slate-600 flex items-center gap-1.5">
+                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px]"><i class="fa-solid fa-money-bill"></i></span>
+                                เงินสดคงเหลือ
+                            </span>
+                            <span class="font-bold text-emerald-700 text-sm sm:text-base" contenteditable="true">00.00 <span class="text-xs font-normal text-slate-500">บาท</span></span>
+                        </div>
+                        <div class="flex justify-between items-center pb-1 border-b border-slate-100">
+                            <span class="text-slate-600 flex items-center gap-1.5">
+                                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px]"><i class="fa-solid fa-arrow-trend-up"></i></span>
+                                เงินเข้าคาดการณ์ 7 วัน
+                            </span>
+                            <div class="highlight-oval">
+                                <span class="font-bold text-emerald-800 text-sm sm:text-base" contenteditable="true">00.00</span> <span class="text-xs font-normal text-slate-500">บาท</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pb-1 border-b border-slate-100">
+                            <span class="text-slate-600 flex items-center gap-1.5">
+                                <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-[10px]"><i class="fa-solid fa-arrow-trend-down"></i></span>
+                                เงินออกคาดการณ์ 7 วัน
+                            </span>
+                            <span class="font-bold text-dashRed text-sm sm:text-base" contenteditable="true">00.00 <span class="text-xs font-normal text-slate-500">บาท</span></span>
+                        </div>
+                        
+                        <!-- Status Alert -->
+                        <div class="mt-1 pt-2 flex items-center justify-between">
+                            <span class="font-semibold text-slate-700">สถานะ:</span>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-amber-400 text-slate-900 font-bold px-5 py-1 rounded text-xs animate-pulse-glow shadow-sm" contenteditable="true">ระวัง</span>
+                                <i class="fa-solid fa-triangle-exclamation text-amber-500 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMPANIES OVERVIEW -->
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-navy text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-city"></i>
+                        <span contenteditable="true">COMPANIES OVERVIEW</span>
+                    </div>
+                    <div class="p-3 text-xs sm:text-sm">
+                        <div class="grid grid-cols-12 text-slate-500 font-medium text-[11px] pb-1.5 border-b mb-2">
+                            <div class="col-span-4">บริษัท</div>
+                            <div class="col-span-6 text-center">ความคืบหน้าโครงการ</div>
+                            <div class="col-span-2 text-right">สถานะ</div>
+                        </div>
+                        
+                        <!-- Row 1 -->
+                        <div class="grid grid-cols-12 items-center mb-3">
+                            <div class="col-span-4 flex items-center gap-1.5">
+                                <span class="bg-slate-900 text-white font-bold text-[9px] p-1 rounded leading-none">NUZEN</span>
+                                <div>
+                                    <div class="font-semibold text-slate-800 text-xs" contenteditable="true">Nuzen Studio</div>
+                                    <div class="text-[9px] text-slate-400 leading-tight" contenteditable="true">• SUBMISSION VICTORY PHASE 2,• SUBMISSION LIBERTY</div>
+                                </div>
+                            </div>
+                            <div class="col-span-6 px-2">
+                                <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-navy h-2.5 rounded-full progress-bar-fill" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                            <div class="col-span-2 text-right font-bold text-xs flex items-center justify-end gap-1">
+                                <span contenteditable="true">70%</span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+                            </div>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="grid grid-cols-12 items-center">
+                            <div class="col-span-4 flex items-center gap-1.5">
+                                <span class="bg-slate-800 text-white font-bold text-[9px] p-1 rounded leading-none">QUIET</span>
+                                <div>
+                                    <div class="font-semibold text-slate-800 text-xs" contenteditable="true">Quiet Force</div>
+                                    <div class="text-[9px] text-slate-400 leading-tight" contenteditable="true">• รอพี่วาสิฏอัปเดต</div>
+                                </div>
+                            </div>
+                            <div class="col-span-6 px-2">
+                                <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-navy h-2.5 rounded-full progress-bar-fill" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                            <div class="col-span-2 text-right font-bold text-xs flex items-center justify-end gap-1">
+                                <span contenteditable="true">60%</span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TODAY SCHEDULE -->
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex-1">
+                    <div class="bg-navy text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+                        <i class="fa-regular fa-clock"></i>
+                        <span contenteditable="true">TODAY SCHEDULE</span>
+                    </div>
+                    <div class="p-3 text-xs flex flex-col gap-2.5">
+                        <div class="flex items-center gap-2.5">
+                            <span class="font-bold text-slate-700 w-10">09:00</span>
+                            <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-xs"><i class="fa-solid fa-users"></i></span>
+                            <span class="font-medium text-slate-800" contenteditable="true">ประชุมทีมออกแบบ</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <span class="font-bold text-slate-700 w-10">13:00</span>
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs"><i class="fa-solid fa-hard-hat"></i></span>
+                            <span class="font-medium text-slate-800" contenteditable="true">ติดตามโฟร์แมน / งานหน้างาน</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <span class="font-bold text-slate-700 w-10">17:00</span>
+                            <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xs"><i class="fa-solid fa-chart-line"></i></span>
+                            <span class="font-medium text-slate-800" contenteditable="true">อัปเดตรายงานต้นทุนอาคาร C</span>
+                        </div>
+                        <div class="text-[10px] text-slate-400 mt-2 italic text-center" contenteditable="true">
+                            หมายเหตุ: เวลาอาจปรับเปลี่ยนตามความเหมาะสม
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ================= MIDDLE COLUMN (5/12) ================= -->
+            <div class="lg:col-span-5 flex flex-col gap-3.5">
+                
+                <!-- TASKS LIST -->
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden h-full flex flex-col">
+                    <div class="bg-navy text-white px-3 py-2 font-semibold text-sm flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <span contenteditable="true">งานสำคัญวันนี้</span>
+                        </div>
+                        <span class="bg-navy-light text-sky-200 px-2 py-0.5 rounded text-xs" contenteditable="true">(10 ข้อ)</span>
+                    </div>
+                    
+                    <div class="p-3 text-xs sm:text-sm flex flex-col gap-2 overflow-y-auto max-h-[620px]">
+                        
+                        <!-- Task Item 1 -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                            <div class="text-slate-800 leading-tight">
+                                <span class="font-bold text-navy" contenteditable="true">NUZEN STUDIO</span>
+                                <div class="text-[11px] text-slate-600 mt-0.5" contenteditable="true">- SUBMISSION VICTORY COMMON AREA PHASE 2 - SUBMISSION HALAL<br>- SUBMISSION LIBERTY</div>
+                            </div>
+                        </div>
+
+                        <!-- Task Item 2 -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">
+                                <span class="font-bold text-navy">QUIET FORCE</span> - รอพี่วาสิฏอัปเดต
+                            </div>
+                        </div>
+
+                        <!-- Task Item 3 -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                            <div class="text-slate-800 leading-tight">
+                                <span class="font-bold text-navy" contenteditable="true">ธุรกิจใหม่</span>
+                                <div class="text-[11px] text-slate-600 mt-0.5" contenteditable="true">- CAFE : ตามช่างเข้างาน / สั่งซื้อของใช้ CAFÉ / สั่งของตกแต่ง<br>- CAMP : รั้ว / ปรับปรุงห้องน้ำ / ทางเดิน / ซ่อมแซมอาคาร / มิตเตอร์ไฟและขยายเขต / ค่าเช่าแคมป์</div>
+                            </div>
+                        </div>
+
+                        <!-- Task Item 4 -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">4</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">ติดต่อเรื่องโอนที่ดินขุนเฒ่าและขอหนังสือยินยอมก่อสร้างอาคารบนที่ดิน</div>
+                        </div>
+
+                        <!-- Task Item 5 -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">5</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">ติดต่อสอบถามเรื่องคดีปลอมแปลงเอกสาร ปปช ภาค 8</div>
+                        </div>
+
+                        <!-- Task Item 6 -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">6</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">ติดตามงานเพิ่มเอกสาร C ( พี่วาสิฏกำลังดำเนินการ )</div>
+                        </div>
+
+                        <!-- Task Item 7 -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">7</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">ติดตามหนังสือจากเทศบาลศรีสุนทร</div>
+                        </div>
+
+                        <!-- Task Item 8 (Highlighted Task) -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 bg-amber-50/60 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">8</span>
+                            <div class="text-slate-900 font-medium" contenteditable="true">ตั้งเบิกค่างวดงาน</div>
+                        </div>
+
+                        <!-- Task Item 9 -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">9</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">ทำอัปเดตรายงานต้นทุนอาคาร C</div>
+                        </div>
+
+                        <!-- Task Item 10 -->
+                        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">10</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">เตรียมเอกสารทางบัญชีให้พี่กิ่ง</div>
+                        </div>
+
+                        <!-- Task Item 11 -->
+                        <!-- <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">11</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">ทำอัปเดตรายงานต้นทุนอาคาร C</div>
+                        </div> -->
+
+                        <!-- Task Item 12 -->
+                        <!-- <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">12</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">เตรียมเอกสารทางบัญชีให้พี่กิ่ง</div>
+                        </div> -->
+
+                        <!-- Task Item 13 -->
+                        <!-- <div class="flex items-start gap-2.5 hover:bg-slate-50 p-1 rounded transition">
+                            <span class="w-5 h-5 rounded-full bg-navy text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">13</span>
+                            <div class="text-slate-800 font-medium" contenteditable="true">คืนค่าประกัน บ.สระแก้ว</div>
+                        </div> -->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ================= RIGHT COLUMN (4/12) ================= -->
+            <div class="lg:col-span-4 flex flex-col gap-3.5">
+                
+                <!-- DECISIONS REQUIRED -->
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-dashRed text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-stamp"></i>
+                        <span contenteditable="true">เรื่องที่ต้องการการตัดสินใจ</span>
+                    </div>
+                    <div class="p-3 text-xs sm:text-sm">
+                        <div class="text-center pb-2 border-b border-slate-100 mb-2">
+                            <div class="text-slate-600 text-xs font-medium" contenteditable="true">อนุมัติจ่ายค่าใช้จ่ายบางส่วน</div>
+                            <div class="text-xl sm:text-2xl font-extrabold text-dashRed mt-0.5" contenteditable="true">76,108.00 <span class="text-xs font-normal text-slate-500">บาท</span></div>
+                        </div>
+                        
+                        <div class="flex flex-col gap-1.5 text-xs text-slate-700 max-h-[220px] overflow-y-auto pr-1">
+                            <!-- <div class="flex justify-between items-center"><span contenteditable="true">• ค่าเช่า (โดยประมาณ)</span><span class="font-semibold" contenteditable="true">30,000.00</span></div> -->
+                            <!-- <div class="flex justify-between items-center"><span contenteditable="true">• ค่างวดรถ BMW (29/7/60)</span><span class="font-semibold" contenteditable="true">31,004.00</span></div> -->
+                            <!-- <div class="flex justify-between items-center"><span contenteditable="true">• ค่าคาราวานใหม่</span><span class="font-semibold" contenteditable="true">10,000.00</span></div> -->
+                            <div class="flex justify-between items-center"><span contenteditable="true">• ค่าเครนเพิ่มทรัพย์</span><span class="font-semibold" contenteditable="true">5,200.00</span></div>
+                            <div class="flex justify-between items-center"><span contenteditable="true">• หนี้เก่าอันดามันโอม</span><span class="font-semibold" contenteditable="true">4,000.00</span></div>
+                            <!-- <div class="flex justify-between items-center"><span contenteditable="true">• ค่าถังขยะ6-8บริษัท</span><span class="font-semibold" contenteditable="true">10,220.00</span></div> -->
+                            <div class="flex justify-between items-center"><span contenteditable="true">• ค่างวดรถขุด Kubota (15/8/69)</span><span class="font-semibold" contenteditable="true">30,900.00</span></div>
+                            <!-- <div class="flex justify-between items-center"><span contenteditable="true">• ค่าทำตราสัญลักษณ์</span><span class="font-semibold" contenteditable="true">2,910.00</span></div> -->
+                            <div class="flex justify-between items-center"><span contenteditable="true">• ค่าเช่าที่ดิน</span><span class="font-semibold" contenteditable="true">36,000.00</span></div>
+                            <!-- <div class="flex justify-between items-center"><span contenteditable="true">• คืนค่าประกัน บ.สระแก้ว</span><span class="font-semibold" contenteditable="true">70,000.00</span></div> -->
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="grid grid-cols-3 gap-2 mt-3 pt-2 border-t border-slate-100 text-center font-semibold text-xs">
+                            <button class="bg-dashGreen hover:bg-emerald-800 text-white py-1.5 px-1 rounded flex items-center justify-center gap-1 transition shadow-sm">
+                                <i class="fa-solid fa-check-circle"></i> อนุมัติ
+                            </button>
+                            <button class="bg-amber-500 hover:bg-amber-600 text-white py-1.5 px-1 rounded flex items-center justify-center gap-1 transition shadow-sm">
+                                <i class="fa-solid fa-pause-circle"></i> ชะลอ
+                            </button>
+                            <button class="bg-slate-500 hover:bg-slate-600 text-white py-1.5 px-1 rounded flex items-center justify-center gap-1 transition shadow-sm">
+                                <i class="fa-solid fa-arrow-right"></i> ติดตาม
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RISK SECTION -->
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-dashRed text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span contenteditable="true">ความเสี่ยง (RISK)</span>
+                    </div>
+                    <div class="p-3 text-xs flex flex-col gap-2">
+                        <!-- Risk 1 -->
+                        <div class="flex items-start gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-dashRed inline-block mt-1 shrink-0"></span>
+                            <div class="flex-1">
+                                <div class="font-bold text-slate-800" contenteditable="true">QNITY TYPE C</div>
+                                <div class="text-[11px] text-slate-500 leading-tight" contenteditable="true">งานโครงสร้างต้องเสร็จ Update แผนงานเป็นรายวันทุกวัน</div>
+                            </div>
+                        </div>
+                        <!-- Risk 2 -->
+                        <div class="flex items-start gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block mt-1 shrink-0"></span>
+                            <div class="flex-1 flex justify-between items-start">
+                                <div>
+                                    <div class="font-bold text-slate-800" contenteditable="true">ลูกหนี้ WLY</div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-[10px] text-slate-400">ค้างชำระ:</span>
+                                    <span class="font-bold text-dashRed" contenteditable="true">4,017,252.31 <span class="text-[9px] font-normal">บาท</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Risk 3 -->
+                        <div class="flex items-start gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-dashRed inline-block mt-1 shrink-0"></span>
+                            <div class="flex-1">
+                                <div class="font-bold text-slate-800" contenteditable="true">THE UNIVERSE (CAFE NUZEN)</div>
+                                <div class="text-[11px] text-slate-500 leading-tight" contenteditable="true">ติดตามความคืบหน้าอย่างใกล้ชิด</div>
+                            </div>
+                        </div>
+                        <!-- Risk 4 -->
+                        <div class="flex items-start gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block mt-1 shrink-0"></span>
+                            <div class="flex-1">
+                                <div class="font-bold text-slate-800" contenteditable="true">ราคางาน FURNITURE ยังไม่สรุป</div>
+                                <div class="text-[11px] text-slate-500 leading-tight" contenteditable="true">Search หาเพิ่มเติม</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IMPORTANT APPOINTMENT -->
+                <div class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex-1">
+                    <div class="bg-dashPurple text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        <span contenteditable="true">นัดหมายสำคัญ</span>
+                    </div>
+                    <div class="p-4 text-center text-xs text-slate-400 flex flex-col items-center justify-center h-full gap-1">
+                        <i class="fa-regular fa-circle-check text-slate-300 text-2xl"></i>
+                        <span contenteditable="true">- ไม่มีนัดหมายสำคัญ -</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= 3. FOOTER KPI BAR ================= -->
+        <footer class="bg-slate-50 border-t border-slate-200 p-3 sm:p-4">
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-3 items-center">
+                
+                <!-- KPI TODAY Brand Badge -->
+                <div class="col-span-2 md:col-span-1 bg-navy text-white rounded-lg p-2.5 text-center flex flex-col items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-chart-pie text-sky-400 text-xl mb-1"></i>
+                    <span class="font-bold text-xs tracking-wider" contenteditable="true">KPI TODAY</span>
+                </div>
+
+                <!-- KPI Card 1: CASH POSITION -->
+                <div class="bg-white p-2 rounded border border-slate-200 text-center shadow-xs">
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-tight" contenteditable="true">CASH POSITION</div>
+                    <div class="text-base font-extrabold text-dashGreen my-0.5" contenteditable="true">80%</div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1 overflow-hidden">
+                        <div class="bg-dashGreen h-1.5 rounded-full progress-bar-fill" style="width: 80%;"></div>
+                    </div>
+                    <div class="text-[9px] text-slate-400" contenteditable="true">สถานะคล่องตัว</div>
+                </div>
+
+                <!-- KPI Card 2: PROJECT PROGRESS -->
+                <div class="bg-white p-2 rounded border border-slate-200 text-center shadow-xs">
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-tight" contenteditable="true">PROJECT PROGRESS</div>
+                    <div class="text-base font-extrabold text-blue-700 my-0.5" contenteditable="true">60%</div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1 overflow-hidden">
+                        <div class="bg-blue-600 h-1.5 rounded-full progress-bar-fill" style="width: 60%;"></div>
+                    </div>
+                    <div class="text-[9px] text-slate-400" contenteditable="true">ติดตามใกล้ชิด</div>
+                </div>
+
+                <!-- KPI Card 3: COLLECTION -->
+                <div class="bg-white p-2 rounded border border-slate-200 text-center shadow-xs">
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-tight" contenteditable="true">COLLECTION</div>
+                    <div class="text-base font-extrabold text-amber-600 my-0.5" contenteditable="true">30%</div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1 overflow-hidden">
+                        <div class="bg-amber-500 h-1.5 rounded-full progress-bar-fill" style="width: 30%;"></div>
+                    </div>
+                    <div class="text-[9px] text-slate-400" contenteditable="true">เร่งติดตามหนี้</div>
+                </div>
+
+                <!-- KPI Card 4: SUBMISSION -->
+                <div class="bg-white p-2 rounded border border-slate-200 text-center shadow-xs">
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-tight" contenteditable="true">SUBMISSION</div>
+                    <div class="text-base font-extrabold text-dashPurple my-0.5" contenteditable="true">70%</div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1 overflow-hidden">
+                        <div class="bg-dashPurple h-1.5 rounded-full progress-bar-fill" style="width: 70%;"></div>
+                    </div>
+                    <div class="text-[9px] text-slate-400" contenteditable="true">อยู่ระหว่างดำเนินการ</div>
+                </div>
+
+                <!-- KPI Card 5: EXPENSE CONTROL -->
+                <div class="bg-white p-2 rounded border border-slate-200 text-center shadow-xs">
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-tight" contenteditable="true">EXPENSE CONTROL</div>
+                    <div class="text-base font-extrabold text-teal-600 my-0.5" contenteditable="true">75%</div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5 mb-1 overflow-hidden">
+                        <div class="bg-teal-500 h-1.5 rounded-full progress-bar-fill" style="width: 75%;"></div>
+                    </div>
+                    <div class="text-[9px] text-slate-400" contenteditable="true">ควบคุมค่าใช้จ่ายได้ดี</div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Motto -->
+            <div class="text-center text-[11px] text-slate-600 font-medium mt-3 pt-2 border-t border-slate-200 flex justify-center items-center gap-3">
+                <span>💡 โฟกัสสิ่งสำคัญ</span>
+                <span>|</span>
+                <span>จัดลำดับงาน</span>
+                <span>|</span>
+                <span>ตัดสินใจไว</span>
+                <span>|</span>
+                <span>ทำให้สำเร็จ</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript for LocalStorage Saving & Editing functionality -->
+    <!-- <script>
+        const STORAGE_KEY = 'ceo_daily_dashboard_data_v1';
+
+        // Save dashboard state
+        function saveDashboardData() {
+            const content = document.getElementById('dashboard-content').innerHTML;
+            localStorage.setItem(STORAGE_KEY, content);
+            
+            // Visual alert
+            alert('✅ บันทึกข้อมูลเรียบร้อยแล้ว!');
+        }
+
+        // Reset to original template
+        function resetDashboardData() {
+            if (confirm('คุณต้องการรีเซ็ตกลับเป็นข้อมูลต้นฉบับหรือไม่?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        }
+
+        // Load data on start
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedContent = localStorage.getItem(STORAGE_KEY);
+            if (savedContent) {
+                document.getElementById('dashboard-content').innerHTML = savedContent;
+            }
+        });
+    </script> -->
+</body>
+</html>
