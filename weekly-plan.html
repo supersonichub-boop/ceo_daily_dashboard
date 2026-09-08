@@ -7,236 +7,244 @@
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{font-family:'Prompt',sans-serif;background:#e8edf2;height:100%;overflow:hidden}
+*{box-sizing:border-box;margin: 0px;padding:0px}
+html,body{font-family:'Prompt',sans-serif;background:#e8edf2;height:100vh;overflow:hidden}
+#app{width:100vw;height:100vh;display:flex;flex-direction:column;padding:5px 6px;gap:4px}
 
-#app{width:100vw;height:100vh;display:flex;flex-direction:column;padding:6px 7px;gap:5px}
+/* HEADER */
+.wp-header{background:#fff;border-radius:10px;padding:5px 14px;display:flex;align-items:center;justify-content:space-between;border:1px solid #dde3eb;flex-shrink:0}
+.wp-header h1{font-size:13px;font-weight:800;color:#0f172a;letter-spacing:.05em}
+.wp-header .sub{font-size:7.5px;color:#64748b;display:flex;align-items:center;gap:5px;margin-top:1px}
+.wp-header .sep{width:1px;height:9px;background:#cbd5e1}
+.wp-header a{font-size:7.5px;font-weight:600;color:#475569;background:#f1f5f9;border-radius:7px;padding:4px 9px;text-decoration:none;display:flex;align-items:center;gap:3px;border:1px solid #e2e8f0}
 
-/* ── HEADER ── */
-.wp-header{
-  background:#fff;border-radius:10px;
-  padding:6px 16px;display:flex;align-items:center;justify-content:space-between;
-  border:1px solid #dde3eb;flex-shrink:0;
-}
-.wp-header-left h1{font-size:15px;font-weight:800;color:#0f172a;letter-spacing:.05em}
-.wp-header-left .sub{
-  font-size:8px;color:#64748b;display:flex;align-items:center;gap:6px;margin-top:1px
-}
-.wp-header-left .sep{width:1px;height:10px;background:#cbd5e1}
-.wp-header a{
-  font-size:8px;font-weight:600;color:#475569;
-  background:#f1f5f9;border-radius:7px;padding:4px 10px;text-decoration:none;
-  display:flex;align-items:center;gap:4px;border:1px solid #e2e8f0
-}
-.wp-header a:hover{background:#e2e8f0}
+/* GRID */
+#grid{flex:1 1 0;display:grid;grid-template-columns:repeat(7,1fr);gap:4px;min-height:0;overflow-y:auto}
+#grid::-webkit-scrollbar{width:3px}
+#grid::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:2px}
 
-/* ── GRID ── */
-#grid{
-  flex:1 1 0;display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:4px;min-height:0;align-items:start;overflow:hidden;
-}
-
-/* ── DAY CARD ── */
+/* DAY CARD */
 .day-card{border-radius:9px;padding:4px;display:flex;flex-direction:column;gap:2px}
 .day-hdr{border-radius:7px;text-align:center;padding:4px 3px 5px;margin-bottom:2px}
 .day-name{font-weight:700;font-size:8.5px;line-height:1.2}
 .day-theme{font-weight:800;font-size:7px;letter-spacing:.05em;line-height:1.3}
-.day-icon{font-size:15px;line-height:1.4;margin-top:1px}
+.day-icon{font-size:14px;line-height:1.4;margin-top:1px}
 
-/* ── SLOT ── */
-.slot{background:#fff;border-radius:5px;padding:3px 4px;flex-shrink:0}
-.slot .time{
-  font-weight:700;font-size:6.5px;line-height:1.3;
-  display:flex;align-items:center;flex-wrap:wrap;gap:2px;margin-bottom:1.5px
-}
+/* SLOT */
+.slot{background:#fff;border-radius:5px;padding:2.5px 4px;flex-shrink:0}
+.slot .time{font-weight:700;font-size:6.5px;line-height:1.3;display:flex;align-items:center;flex-wrap:wrap;gap:2px;margin-bottom:1px}
 .badge{font-size:5.5px;padding:0 3px;border-radius:3px;font-weight:700;line-height:1.5}
 .slot ul{padding-left:9px;margin:0}
-.slot li{font-size:6.5px;line-height:1.4;color:#475569}
-.slot .txt{font-size:6.5px;color:#475569;line-height:1.4}
+.slot li{font-size:6.5px;line-height:1.35;color:#475569}
+.slot .txt{font-size:6.5px;color:#475569;line-height:1.35}
 .slot .focus{font-weight:700;font-size:6.5px}
 
-/* ── NIGHT GRID ── */
+/* NIGHT */
 .night{border-top:1px solid;margin-top:2px;padding-top:2px;display:grid;grid-template-columns:1fr 1fr;gap:1.5px}
 .ni{border-radius:3px;padding:1.5px 3px;display:flex;flex-direction:column}
 .ni .nt{font-size:5.5px;opacity:.8;white-space:nowrap}
 .ni .na{font-size:6px;font-weight:600}
 
-/* ── FOOTER ── */
-.wp-footer{
-  flex-shrink:0;background:#fff;border-radius:10px;
-  padding:5px 10px;border:1px solid #dde3eb;
-}
+/* FOOTER */
+.wp-footer{flex-shrink:0;background:#fff;border-radius:10px;padding:4px 10px;border:1px solid #dde3eb}
 .principles{display:grid;grid-template-columns:auto 1fr 1fr 1fr 1fr;gap:5px;align-items:center}
-.kp-title{
-  background:#0f172a;color:#fff;border-radius:8px;padding:5px 10px;
-  font-weight:700;font-size:8px;text-align:center;line-height:1.4;white-space:nowrap
-}
-.kp-item{
-  background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;
-  padding:4px 8px;display:flex;align-items:center;gap:6px
-}
-.kp-ico{font-size:16px;flex-shrink:0}
-.kp-lbl{font-weight:700;font-size:7.5px;color:#1e293b;line-height:1.3}
-.kp-sub{font-size:6.5px;color:#64748b;line-height:1.3}
+.kp-title{background:#0f172a;color:#fff;border-radius:7px;padding:4px 9px;font-weight:700;font-size:7.5px;text-align:center;line-height:1.4;white-space:nowrap}
+.kp-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:7px;padding:3px 7px;display:flex;align-items:center;gap:5px}
+.kp-ico{font-size:14px;flex-shrink:0}
+.kp-lbl{font-weight:700;font-size:7px;color:#1e293b;line-height:1.3}
+.kp-sub{font-size:6px;color:#64748b;line-height:1.3}
 
-/* ── COLORS PER DAY ── */
+/* COLORS */
 .mon .day-card{background:#fffbeb;border:2px solid #fcd34d}
 .mon .day-hdr{background:#fef3c7;border:1px solid #fde68a}
 .mon .day-name{color:#92400e}.mon .day-theme{color:#b45309}
-.mon .slot{border:1px solid rgba(253,211,77,.5)}.mon .time{color:#b45309}
-.mon .badge{background:#fef3c7;color:#92400e}
-.mon .focus{color:#b45309}
+.mon .slot{border:1px solid rgba(253,211,77,.4)}.mon .time{color:#b45309}
+.mon .badge{background:#fef3c7;color:#92400e}.mon .focus{color:#b45309}
 .mon .night{border-color:#fcd34d}.mon .ni{background:#fef9e7;color:#78350f}
 
 .tue .day-card{background:#eff6ff;border:2px solid #93c5fd}
 .tue .day-hdr{background:#dbeafe;border:1px solid #bfdbfe}
 .tue .day-name{color:#1e3a8a}.tue .day-theme{color:#1d4ed8}
-.tue .slot{border:1px solid rgba(147,197,253,.5)}.tue .time{color:#1d4ed8}
-.tue .badge{background:#dbeafe;color:#1e3a8a}
-.tue .focus{color:#1d4ed8}
+.tue .slot{border:1px solid rgba(147,197,253,.4)}.tue .time{color:#1d4ed8}
+.tue .badge{background:#dbeafe;color:#1e3a8a}.tue .focus{color:#1d4ed8}
 .tue .night{border-color:#93c5fd}.tue .ni{background:#eff6ff;color:#1e3a8a}
 
 .wed .day-card{background:#f0fdf4;border:2px solid #86efac}
 .wed .day-hdr{background:#dcfce7;border:1px solid #bbf7d0}
 .wed .day-name{color:#14532d}.wed .day-theme{color:#15803d}
-.wed .slot{border:1px solid rgba(134,239,172,.5)}.wed .time{color:#15803d}
-.wed .badge{background:#dcfce7;color:#14532d}
-.wed .focus{color:#15803d}
+.wed .slot{border:1px solid rgba(134,239,172,.4)}.wed .time{color:#15803d}
+.wed .badge{background:#dcfce7;color:#14532d}.wed .focus{color:#15803d}
 .wed .night{border-color:#86efac}.wed .ni{background:#f0fdf4;color:#14532d}
 
 .thu .day-card{background:#faf5ff;border:2px solid #c084fc}
 .thu .day-hdr{background:#f3e8ff;border:1px solid #e9d5ff}
 .thu .day-name{color:#4a1d96}.thu .day-theme{color:#7c3aed}
-.thu .slot{border:1px solid rgba(192,132,252,.5)}.thu .time{color:#7c3aed}
-.thu .badge{background:#f3e8ff;color:#4a1d96}
-.thu .focus{color:#7c3aed}
+.thu .slot{border:1px solid rgba(192,132,252,.4)}.thu .time{color:#7c3aed}
+.thu .badge{background:#f3e8ff;color:#4a1d96}.thu .focus{color:#7c3aed}
 .thu .night{border-color:#c084fc}.thu .ni{background:#faf5ff;color:#4a1d96}
 
 .fri .day-card{background:#f0f9ff;border:2px solid #7dd3fc}
 .fri .day-hdr{background:#e0f2fe;border:1px solid #bae6fd}
 .fri .day-name{color:#0c4a6e}.fri .day-theme{color:#0369a1}
-.fri .slot{border:1px solid rgba(125,211,252,.5)}.fri .time{color:#0369a1}
-.fri .badge{background:#e0f2fe;color:#0c4a6e}
-.fri .focus{color:#0369a1}
+.fri .slot{border:1px solid rgba(125,211,252,.4)}.fri .time{color:#0369a1}
+.fri .badge{background:#e0f2fe;color:#0c4a6e}.fri .focus{color:#0369a1}
 .fri .night{border-color:#7dd3fc}.fri .ni{background:#f0f9ff;color:#0c4a6e}
 
 .sat .day-card{background:#eef2ff;border:2px solid #a5b4fc}
 .sat .day-hdr{background:#e0e7ff;border:1px solid #c7d2fe}
 .sat .day-name{color:#312e81}.sat .day-theme{color:#4338ca}
-.sat .slot{border:1px solid rgba(165,180,252,.5)}.sat .time{color:#4338ca}
-.sat .badge{background:#e0e7ff;color:#312e81}
-.sat .focus{color:#4338ca}
+.sat .slot{border:1px solid rgba(165,180,252,.4)}.sat .time{color:#4338ca}
+.sat .badge{background:#e0e7ff;color:#312e81}.sat .focus{color:#4338ca}
 .sat .night{border-color:#a5b4fc}.sat .ni{background:#eef2ff;color:#312e81}
 
 .sun .day-card{background:#fff1f2;border:2px solid #fda4af}
 .sun .day-hdr{background:#ffe4e6;border:1px solid #fecdd3}
 .sun .day-name{color:#881337}.sun .day-theme{color:#be123c}
-.sun .slot{border:1px solid rgba(253,164,175,.5)}.sun .time{color:#be123c}
-.sun .badge{background:#ffe4e6;color:#881337}
-.sun .focus{color:#be123c}
+.sun .slot{border:1px solid rgba(253,164,175,.4)}.sun .time{color:#be123c}
+.sun .badge{background:#ffe4e6;color:#881337}.sun .focus{color:#be123c}
 .sun .night{border-color:#fda4af}.sun .ni{background:#fff1f2;color:#881337}
 </style>
 </head>
 <body>
 <div id="app">
 
+<!-- HEADER -->
 <div class="wp-header">
-  <div class="wp-header-left">
+  <div>
     <h1>WEEKLY PLAN – 7 DAYS OVERVIEW</h1>
-    <div class="sub">
-      <span>วางแผนชีวิต</span><div class="sep"></div>
-      <span>บริหารเวลา</span><div class="sep"></div>
-      <span>สร้างผลลัพธ์</span>
-    </div>
+    <div class="sub"><span>วางแผนชีวิต</span><div class="sep"></div><span>บริหารเวลา</span><div class="sep"></div><span>สร้างผลลัพธ์</span></div>
   </div>
   <a href="index.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
 </div>
 
+<!-- GRID -->
 <div id="grid">
 
-  <div class="mon"><div class="day-card">
-    <div class="day-hdr"><div class="day-name">วันจันทร์</div><div class="day-theme">DESIGN DAY</div><div class="day-icon">🎨</div></div>
-    <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
-    <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
-    <div class="slot"><div class="time">11.00–13.00</div><ul><li>Nuzen Studio</li><li>Design Direction</li><li>Concept Design</li><li>Review งานออกแบบ</li><li>พัฒนาบริการใหม่</li></ul></div>
-    <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
-    <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li></ul></div>
-    <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ <span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
-    <div class="slot"><div class="time">17.00–19.00 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร</li><li>ตอบแชท / วางแผนวันถัดไป</li><li class="focus">Focus: ปรับปรุงระบบบริษัท</li></ul></div>
-    <div class="night"><div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div><div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 อ่านหนังสือ/Youtube</span></div><div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div><div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div></div>
-  </div></div>
+<!-- จันทร์ -->
+<div class="mon"><div class="day-card">
+  <div class="day-hdr"><div class="day-name">วันจันทร์</div><div class="day-theme">DESIGN DAY</div><div class="day-icon">🎨</div></div>
+  <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
+  <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
+  <div class="slot"><div class="time">11.00–13.00</div><ul><li>Nuzen Studio</li><li>Design Direction</li><li>Concept Design</li><li>Review งานออกแบบ</li><li>พัฒนาบริการใหม่</li></ul></div>
+  <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
+  <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li></ul></div>
+  <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่<br><span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
+  <div class="slot"><div class="time">17.00–19.00 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร</li><li>ตอบแชท / วางแผนวันถัดไป</li><li class="focus">Focus: ปรับปรุงระบบบริษัท</li></ul></div>
+  <div class="night">
+    <div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div>
+    <div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 อ่านหนังสือ/Youtube</span></div>
+    <div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div>
+    <div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div>
+  </div>
+</div></div>
 
-  <div class="tue"><div class="day-card">
-    <div class="day-hdr"><div class="day-name">วันอังคาร</div><div class="day-theme">CONSTRUCTION DAY</div><div class="day-icon">🏗️</div></div>
-    <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
-    <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
-    <div class="slot"><div class="time">11.00–13.00</div><ul><li>Quiet Force</li><li>Site Review</li><li>Cost Control</li><li>Quality Control</li><li>ตรวจปัญหาโครงการ</li></ul></div>
-    <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
-    <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="focus">Focus: ติดตามโปรเจ็คแมน</li></ul></div>
-    <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ <span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
-    <div class="slot"><div class="time">17.00–19.20 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร / ตอบแชท</li><li>17.20–18.40 เดินออกกำลังกาย</li></ul></div>
-    <div class="night"><div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div><div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 อ่านหนังสือ/Youtube</span></div><div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div><div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div></div>
-  </div></div>
+<!-- อังคาร -->
+<div class="tue"><div class="day-card">
+  <div class="day-hdr"><div class="day-name">วันอังคาร</div><div class="day-theme">CONSTRUCTION DAY</div><div class="day-icon">🏗️</div></div>
+  <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
+  <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
+  <div class="slot"><div class="time">11.00–13.00</div><ul><li>Quiet Force</li><li>Site Review</li><li>Cost Control</li><li>Quality Control</li><li>ตรวจปัญหาโครงการ</li></ul></div>
+  <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
+  <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="focus">Focus: ติดตามโปรเจ็คแมน</li></ul></div>
+  <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่<br><span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
+  <div class="slot"><div class="time">17.00–19.20 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร / ตอบแชท</li><li>17.20–18.40 เดินออกกำลังกาย</li></ul></div>
+  <div class="night">
+    <div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div>
+    <div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 อ่านหนังสือ/Youtube</span></div>
+    <div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div>
+    <div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div>
+  </div>
+</div></div>
 
-  <div class="wed"><div class="day-card">
-    <div class="day-hdr"><div class="day-name">วันพุธ</div><div class="day-theme">MONEY DAY</div><div class="day-icon">💰</div></div>
-    <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
-    <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
-    <div class="slot"><div class="time">11.00–13.00</div><ul><li>การเงินทั้งหมด</li><li>Cash Flow</li><li>รายรับรายจ่าย</li><li>หนี้สิน</li><li>งบการเงิน</li></ul></div>
-    <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
-    <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="focus">Focus: การลงทุน</li><li class="focus" style="font-weight:400">· หุ้นไทย / หุ้นต่างประเทศ</li><li class="focus" style="font-weight:400">· Bitcoin / Asset Allocation</li></ul></div>
-    <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ <span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
-    <div class="slot"><div class="time">17.00–19.00 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร</li><li>ตอบแชท / วางแผนวันถัดไป</li><li class="focus">Focus: ปรับปรุงระบบบริษัท</li></ul></div>
-    <div class="night"><div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div><div class="ni"><span class="nt">19.30–21.00</span><span class="na">▶️ ทำข้อมูลผ่าน Youtube</span></div><div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div><div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div></div>
-  </div></div>
+<!-- พุธ -->
+<div class="wed"><div class="day-card">
+  <div class="day-hdr"><div class="day-name">วันพุธ</div><div class="day-theme">MONEY DAY</div><div class="day-icon">💰</div></div>
+  <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
+  <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
+  <div class="slot"><div class="time">11.00–13.00</div><ul><li>การเงินทั้งหมด</li><li>Cash Flow</li><li>รายรับรายจ่าย</li><li>หนี้สิน</li><li>งบการเงิน</li></ul></div>
+  <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
+  <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="focus">Focus: การลงทุน</li><li style="font-size:6px;color:#15803d">· หุ้นไทย / หุ้นต่างประเทศ</li><li style="font-size:6px;color:#15803d">· Bitcoin / Asset Allocation</li></ul></div>
+  <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่<br><span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
+  <div class="slot"><div class="time">17.00–19.00 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร</li><li>ตอบแชท / วางแผนวันถัดไป</li><li class="focus">Focus: ปรับปรุงระบบบริษัท</li></ul></div>
+  <div class="night">
+    <div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div>
+    <div class="ni"><span class="nt">19.30–21.00</span><span class="na">▶️ ทำข้อมูลผ่าน Youtube</span></div>
+    <div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div>
+    <div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div>
+  </div>
+</div></div>
 
-  <div class="thu"><div class="day-card">
-    <div class="day-hdr"><div class="day-name">วันพฤหัสบดี</div><div class="day-theme">GROWTH DAY</div><div class="day-icon">📈</div></div>
-    <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
-    <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
-    <div class="slot"><div class="time">11.00–13.00</div><ul><li>ธุรกิจใหม่</li><li>Cafe Sandwich</li><li>Camp คูนาย</li><li>Parking</li><li>Land Development</li></ul></div>
-    <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
-    <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="focus">Focus: คู่ค้า / นักลงทุน / พันธมิตร</li></ul></div>
-    <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ <span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
-    <div class="slot"><div class="time">17.00–19.20 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร / ตอบแชท</li><li>17.20–18.40 เดินออกกำลังกาย</li></ul></div>
-    <div class="night"><div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div><div class="ni"><span class="nt">19.30–21.00</span><span class="na">▶️ ทำข้อมูล Youtube</span></div><div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div><div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div></div>
-  </div></div>
+<!-- พฤหัส -->
+<div class="thu"><div class="day-card">
+  <div class="day-hdr"><div class="day-name">วันพฤหัสบดี</div><div class="day-theme">GROWTH DAY</div><div class="day-icon">📈</div></div>
+  <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
+  <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
+  <div class="slot"><div class="time">11.00–13.00</div><ul><li>ธุรกิจใหม่</li><li>Cafe Sandwich</li><li>Camp คูนาย</li><li>Parking</li><li>Land Development</li></ul></div>
+  <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
+  <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="focus">Focus: คู่ค้า / นักลงทุน / พันธมิตร</li></ul></div>
+  <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่<br><span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
+  <div class="slot"><div class="time">17.00–19.20 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร / ตอบแชท</li><li>17.20–18.40 เดินออกกำลังกาย</li></ul></div>
+  <div class="night">
+    <div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div>
+    <div class="ni"><span class="nt">19.30–21.00</span><span class="na">▶️ ทำข้อมูล Youtube</span></div>
+    <div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div>
+    <div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div>
+  </div>
+</div></div>
 
-  <div class="fri"><div class="day-card">
-    <div class="day-hdr"><div class="day-name">วันศุกร์</div><div class="day-theme">OWNER DAY</div><div class="day-icon">👑</div></div>
-    <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
-    <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
-    <div class="slot"><div class="time">11.00–13.00</div><ul><li>เรื่องเจ้าของกิจการ</li><li>คดีความ</li><li>เอกสาร</li><li>หนาย</li><li>หุ้นส่วน</li><li>ความเสี่ยง</li></ul></div>
-    <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
-    <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="focus">Focus: Review ทั้งสัปดาห์</li></ul></div>
-    <div class="slot"><div class="time">13.00–15.00</div><ul><li>🔍 ดูที่ดิน / ดูโครงการ</li><li>สำรวจโอกาส</li></ul></div>
-    <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่ <span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
-    <div class="slot"><div class="time">17.00–19.00 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร</li><li>ตอบแชท / วางแผนวันถัดไป</li><li class="focus">Focus: ปรับปรุงระบบบริษัท</li></ul></div>
-    <div class="night"><div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div><div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 หาข้อมูล Youtube</span></div><div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div><div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div></div>
-  </div></div>
+<!-- ศุกร์ -->
+<div class="fri"><div class="day-card">
+  <div class="day-hdr"><div class="day-name">วันศุกร์</div><div class="day-theme">OWNER DAY</div><div class="day-icon">👑</div></div>
+  <div class="slot"><div class="time">08.30–10.00 <span class="badge">MORNING</span></div><ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul></div>
+  <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
+  <div class="slot"><div class="time">11.00–13.00</div><ul><li>เรื่องเจ้าของกิจการ</li><li>คดีความ</li><li>เอกสาร</li><li>หนาย</li><li>หุ้นส่วน</li><li>ความเสี่ยง</li></ul></div>
+  <div class="slot"><div class="time">13.00–14.00</div><div class="txt">🍽️ อาหารกลางวัน (เดิน 10-15 นาที)</div></div>
+  <div class="slot"><div class="time">14.00–15.00 <span class="badge">AFTERNOON</span></div><ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="focus">Focus: Review ทั้งสัปดาห์</li></ul></div>
+  <div class="slot"><div class="time">13.00–15.00</div><ul><li>🔍 ดูที่ดิน / ดูโครงการ</li><li>สำรวจโอกาส</li></ul></div>
+  <div class="slot"><div class="time">15.00–17.00</div><div class="txt">👨‍👩‍👧‍👦 รับลูก อยู่กับลูกเต็มที่<br><span style="font-size:5.5px">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div></div>
+  <div class="slot"><div class="time">17.00–19.00 <span class="badge">EVENING</span></div><ul><li>ตรวจงาน / อ่านเอกสาร</li><li>ตอบแชท / วางแผนวันถัดไป</li><li class="focus">Focus: ปรับปรุงระบบบริษัท</li></ul></div>
+  <div class="night">
+    <div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div>
+    <div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 หาข้อมูล Youtube</span></div>
+    <div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div>
+    <div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div>
+  </div>
+</div></div>
 
-  <div class="sat"><div class="day-card">
-    <div class="day-hdr"><div class="day-name">วันเสาร์</div><div class="day-theme">FUTURE DAY</div><div class="day-icon">🚀</div></div>
-    <div class="slot"><div class="time">07.00–08.30</div><div class="txt">🏃 เดินออกกำลังกาย</div></div>
-    <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
-    <div class="slot"><div class="time">11.00–13.00</div><ul><li>ศึกษาการลงทุน</li><li>อสังหา</li><li>AI</li><li>ธุรกิจใหม่</li></ul></div>
-    <div class="slot"><div class="time">13.00–15.00</div><ul><li>🔍 ดูที่ดิน / ดูโครงการ</li><li>สำรวจโอกาส</li></ul></div>
-    <div class="slot"><div class="time">15.00–17.00</div><ul><li>📱 Personal Branding</li><li>Facebook</li><li>Instagram / Tiktok</li><li>ถ่ายรูป</li><li>ทำ Content</li><li>ภาษาอังกฤษ</li></ul></div>
-    <div class="night"><div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div><div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 อ่านหนังสือ/Youtube</span></div><div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div><div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div></div>
-  </div></div>
+<!-- เสาร์ -->
+<div class="sat"><div class="day-card">
+  <div class="day-hdr"><div class="day-name">วันเสาร์</div><div class="day-theme">FUTURE DAY</div><div class="day-icon">🚀</div></div>
+  <div class="slot"><div class="time">07.00–08.30</div><div class="txt">🏃 เดินออกกำลังกาย</div></div>
+  <div class="slot"><div class="time">10.00–11.00</div><div class="txt">🚿 อาบน้ำ</div></div>
+  <div class="slot"><div class="time">11.00–13.00</div><ul><li>ศึกษาการลงทุน</li><li>อสังหา</li><li>AI</li><li>ธุรกิจใหม่</li></ul></div>
+  <div class="slot"><div class="time">13.00–15.00</div><ul><li>🔍 ดูที่ดิน / ดูโครงการ</li><li>สำรวจโอกาส</li></ul></div>
+  <div class="slot"><div class="time">15.00–17.00</div><ul><li>📱 Personal Branding</li><li>Facebook</li><li>Instagram / Tiktok</li><li>ถ่ายรูป</li><li>ทำ Content</li><li>ภาษาอังกฤษ</li></ul></div>
+  <div class="night">
+    <div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div>
+    <div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 อ่านหนังสือ/Youtube</span></div>
+    <div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div>
+    <div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div>
+  </div>
+</div></div>
 
-  <div class="sun"><div class="day-card">
-    <div class="day-hdr"><div class="day-name">วันอาทิตย์</div><div class="day-theme">RECOVERY DAY</div><div class="day-icon">🌿</div></div>
-    <div class="slot"><div class="time">เช้า (Morning)</div><ul><li>ดู Youtube ความรู้</li><li>อาหารเช้า</li><li>กาแฟ / อ่านหนังสือ</li></ul></div>
-    <div class="slot"><div class="time">กลางวัน (Midday)</div><ul><li>👨‍👩‍👧‍👦 ลูก</li><li>คนรัก</li><li>ญาติพี่น้อง</li></ul></div>
-    <div class="slot"><div class="time">15.00–17.00</div><ul><li>🏃 เดินออกกำลังกาย</li><li>วางแผนสัปดาห์ 30 นาที</li><li>เตรียมเป้าหมายสัปดาห์ใหม่</li></ul></div>
-    <div class="slot"><div class="time">เย็น (Evening)</div><ul><li>🏃 เดินออกกำลังกาย</li><li>วางแผนสัปดาห์ 30 นาที</li><li>เตรียมเป้าหมายสัปดาห์ใหม่</li></ul></div>
-    <div class="night"><div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div><div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 อ่านหนังสือ / ดู Youtube</span></div><div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div><div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div></div>
-  </div></div>
+<!-- อาทิตย์ -->
+<div class="sun"><div class="day-card">
+  <div class="day-hdr"><div class="day-name">วันอาทิตย์</div><div class="day-theme">RECOVERY DAY</div><div class="day-icon">🌿</div></div>
+  <div class="slot"><div class="time">เช้า (Morning)</div><ul><li>ดู Youtube ความรู้</li><li>อาหารเช้า</li><li>กาแฟ / อ่านหนังสือ</li></ul></div>
+  <div class="slot"><div class="time">กลางวัน (Midday)</div><ul><li>👨‍👩‍👧‍👦 ลูก</li><li>คนรัก</li><li>ญาติพี่น้อง</li></ul></div>
+  <div class="slot"><div class="time">15.00–17.00</div><ul><li>🏃 เดินออกกำลังกาย</li><li>วางแผนสัปดาห์ 30 นาที</li><li>เตรียมเป้าหมายสัปดาห์ใหม่</li></ul></div>
+  <div class="slot"><div class="time">เย็น (Evening)</div><ul><li>🏃 เดินออกกำลังกาย</li><li>วางแผนสัปดาห์ 30 นาที</li><li>เตรียมเป้าหมายสัปดาห์ใหม่</li></ul></div>
+  <div class="night">
+    <div class="ni"><span class="nt">19.00–19.30</span><span class="na">🎓 เรียน ENG Online</span></div>
+    <div class="ni"><span class="nt">19.30–21.00</span><span class="na">📖 อ่านหนังสือ / ดู Youtube</span></div>
+    <div class="ni"><span class="nt">21.00–21.45</span><span class="na">🛁 อาบน้ำ</span></div>
+    <div class="ni"><span class="nt">21.45–22.00</span><span class="na">🛌 เตรียมตัวนอน</span></div>
+  </div>
+</div></div>
 
-</div>
+</div><!-- /grid -->
 
+<!-- FOOTER -->
 <div class="wp-footer">
   <div class="principles">
     <div class="kp-title">KEY<br>PRINCIPLES</div>
