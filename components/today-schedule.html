@@ -1,0 +1,30 @@
+<!-- ============================================================
+     COMPONENT: Today Schedule
+     ข้อมูลอ่านจาก DASHBOARD_DATA.schedule
+     ============================================================ -->
+<div id="comp-schedule" class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex-1"></div>
+
+<script>
+(function renderSchedule() {
+  const items = DASHBOARD_DATA.schedule;
+
+  const body = items.length === 0
+    ? `<div class="p-4 text-center text-xs text-slate-400 flex flex-col items-center justify-center h-full gap-1">
+         <i class="fa-regular fa-circle-check text-slate-300 text-2xl"></i>
+         <span>- ไม่มีตารางวันนี้ -</span>
+       </div>`
+    : items.map((it, i) => `
+        <div class="flex items-start gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+          <span class="w-5 h-5 rounded-full bg-[#0B1E36] text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">${i+1}</span>
+          ${it.time ? `<span class="font-bold text-slate-700 w-12 shrink-0">${it.time}</span>` : ''}
+          <div class="text-slate-800 font-medium">${it.title}</div>
+        </div>`).join('');
+
+  document.getElementById('comp-schedule').innerHTML = `
+    <div class="bg-[#0B1E36] text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+      <i class="fa-regular fa-clock"></i>
+      <span>TODAY SCHEDULE</span>
+    </div>
+    <div class="p-3 text-xs flex flex-col gap-2.5">${body}</div>`;
+})();
+</script>

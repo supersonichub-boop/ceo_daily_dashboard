@@ -1,0 +1,42 @@
+<!-- ============================================================
+     COMPONENT: Tasks (งานสำคัญวันนี้)
+     ============================================================ -->
+<div id="comp-tasks"
+  style="display:flex;flex-direction:column;background:white;border-radius:8px;
+         box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid #e2e8f0;
+         height:100%;min-height:0;overflow:hidden;">
+</div>
+
+<script>
+(function renderTasks() {
+  const tasks = DASHBOARD_DATA.tasks;
+
+  const rows = tasks.map((t, i) => {
+    const detail = t.detail
+      ? `<div class="text-[11px] text-slate-600 mt-0.5">${t.detail.replace(/\n/g,'<br>')}</div>`
+      : '';
+    const titleEl = t.bold
+      ? `<span class="font-bold text-[#0B1E36]">${t.title}</span>`
+      : `<span class="font-medium">${t.title}</span>`;
+    const border = i < tasks.length - 1 ? 'border-b border-slate-100' : '';
+    return `
+      <div class="flex items-start gap-2.5 ${border} hover:bg-slate-50 p-1 pb-2 rounded transition">
+        <span class="w-5 h-5 rounded-full bg-[#0B1E36] text-white text-[10px] font-bold
+                     flex items-center justify-center shrink-0 mt-0.5">${i+1}</span>
+        <div class="text-slate-800 leading-tight">${titleEl}${detail}</div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('comp-tasks').innerHTML = `
+    <div class="bg-[#0B1E36] text-white px-3 py-2 font-semibold text-sm flex items-center justify-between flex-shrink-0">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <span>งานสำคัญวันนี้</span>
+      </div>
+      <span class="bg-[#162D4A] text-sky-200 px-2 py-0.5 rounded text-xs">${tasks.length} ข้อ</span>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:4px;">
+      ${rows}
+    </div>`;
+})();
+</script>

@@ -1,0 +1,30 @@
+<!-- ============================================================
+     COMPONENT: Appointments (นัดหมายสำคัญ)
+     ข้อมูลอ่านจาก DASHBOARD_DATA.appointments
+     ============================================================ -->
+<div id="comp-appointments" class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden flex-1"></div>
+
+<script>
+(function renderAppointments() {
+  const items = DASHBOARD_DATA.appointments;
+
+  const body = items.length === 0
+    ? `<div class="p-4 text-center text-xs text-slate-400 flex flex-col items-center justify-center h-full gap-1">
+         <i class="fa-regular fa-calendar-check text-slate-300 text-2xl"></i>
+         <span>- ไม่มีนัดหมายสำคัญ -</span>
+       </div>`
+    : items.map((it, i) => `
+        <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100 hover:bg-slate-50 p-1 rounded transition">
+          <span class="w-5 h-5 rounded-full bg-purple-700 text-white text-[10px] font-bold flex items-center justify-center shrink-0">${i+1}</span>
+          ${it.time ? `<span class="font-bold text-slate-700 w-14 shrink-0">${it.time}</span>` : ''}
+          <div class="text-slate-800 font-medium">${it.title}</div>
+        </div>`).join('');
+
+  document.getElementById('comp-appointments').innerHTML = `
+    <div class="bg-[#5A2A82] text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+      <i class="fa-regular fa-calendar-check"></i>
+      <span>นัดหมายสำคัญ</span>
+    </div>
+    <div class="p-3 text-xs flex flex-col gap-2.5">${body}</div>`;
+})();
+</script>

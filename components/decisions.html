@@ -1,0 +1,56 @@
+<!-- ============================================================
+     COMPONENT: Decisions Required (เรื่องที่ต้องการตัดสินใจ)
+     ยอดรวมคำนวณอัตโนมัติจาก DASHBOARD_DATA.decisionItems
+     ============================================================ -->
+<div id="comp-decisions" class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden"></div>
+
+<script>
+(function renderDecisions() {
+  const items  = DASHBOARD_DATA.decisionItems;
+  const title  = DASHBOARD_DATA.decisionTitle;
+  const total  = KPI_CALC.decisionTotal;
+  const fmt    = n => n.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  const rows = items.map(it => {
+    // บรรทัด group header
+    if (it.group) {
+      return `<div class="flex justify-between items-center mt-1">
+                <span class="font-bold text-slate-700">${it.group}</span>
+              </div>`;
+    }
+    const val = (!it.amount || it.amount === 0) ? '-' : fmt(it.amount);
+    return `<div class="flex justify-between items-center">
+              <span class="text-slate-600">• ${it.label}</span>
+              <span class="font-semibold shrink-0 ml-2">${val}</span>
+            </div>`;
+  }).join('');
+
+  document.getElementById('comp-decisions').innerHTML = `
+    <div class="bg-[#9E1A1A] text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+      <i class="fa-solid fa-stamp"></i>
+      <span>เรื่องที่ต้องการตัดสินใจ</span>
+    </div>
+    <div class="p-3 text-xs sm:text-sm">
+      <div class="text-center pb-2 border-b border-slate-100 mb-2">
+        <div class="text-slate-600 text-xs font-medium">${title}</div>
+        <div class="text-xl sm:text-2xl font-extrabold text-[#9E1A1A] mt-0.5">
+          ${fmt(total)} <span class="text-xs font-normal text-slate-500">บาท</span>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1.5 text-xs text-slate-700 max-h-[220px] overflow-y-auto pr-1">
+        ${rows}
+      </div>
+      <div class="grid grid-cols-3 gap-2 mt-3 pt-2 border-t border-slate-100 text-center font-semibold text-xs">
+        <button class="bg-[#217346] hover:bg-emerald-800 text-white py-1.5 px-1 rounded flex items-center justify-center gap-1 transition shadow-sm">
+          <i class="fa-solid fa-check-circle"></i> อนุมัติ
+        </button>
+        <button class="bg-amber-500 hover:bg-amber-600 text-white py-1.5 px-1 rounded flex items-center justify-center gap-1 transition shadow-sm">
+          <i class="fa-solid fa-pause-circle"></i> ชะลอ
+        </button>
+        <button class="bg-slate-500 hover:bg-slate-600 text-white py-1.5 px-1 rounded flex items-center justify-center gap-1 transition shadow-sm">
+          <i class="fa-solid fa-arrow-right"></i> ติดตาม
+        </button>
+      </div>
+    </div>`;
+})();
+</script>

@@ -1,0 +1,43 @@
+<!-- ============================================================
+     COMPONENT: Risk (ความเสี่ยง)
+     ข้อมูลอ่านจาก DASHBOARD_DATA.risks
+     ============================================================ -->
+<div id="comp-risk" class="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden"></div>
+
+<script>
+(function renderRisk() {
+  const risks = DASHBOARD_DATA.risks;
+  const fmt   = n => n.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const dotMap = { red: "bg-[#9E1A1A]", amber: "bg-amber-400" };
+
+  const rows = risks.map(r => {
+    const dot = dotMap[r.level] || "bg-amber-400";
+    const overdueHtml = r.overdue
+      ? `<div class="text-right ml-2 shrink-0">
+           <span class="text-[10px] text-slate-400">ค้างชำระ:</span>
+           <span class="font-bold text-[#9E1A1A]"> ${fmt(r.overdue)} <span class="text-[9px] font-normal">บาท</span></span>
+         </div>` : '';
+    const detailHtml = r.detail
+      ? `<div class="text-[11px] text-slate-500 leading-tight">${r.detail}</div>` : '';
+
+    return `
+      <div class="flex items-start gap-2">
+        <span class="w-2.5 h-2.5 rounded-full ${dot} inline-block mt-1 shrink-0"></span>
+        <div class="flex-1 flex justify-between items-start">
+          <div>
+            <div class="font-bold text-slate-800">${r.title}</div>
+            ${detailHtml}
+          </div>
+          ${overdueHtml}
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('comp-risk').innerHTML = `
+    <div class="bg-[#9E1A1A] text-white px-3 py-2 font-semibold text-sm flex items-center gap-2">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span>ความเสี่ยง (RISK)</span>
+    </div>
+    <div class="p-3 text-xs flex flex-col gap-2">${rows}</div>`;
+})();
+</script>
