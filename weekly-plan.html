@@ -7,56 +7,59 @@
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-height:100vh}
-#app{width:100%;min-height:100vh;display:flex;flex-direction:column;padding:8px 8px 8px 8px;gap:6px}
+html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;height:100vh;overflow:hidden}
+#app{width:100vw;height:100vh;display:flex;flex-direction:column;padding:6px;gap:5px}
 
 /* ── HEADER ── */
-.wp-header{background:#fff;border-radius:12px;padding:10px 16px 8px;text-align:center;border:1px solid #e2e8f0;flex-shrink:0;position:relative}
-.wp-header h1{font-size:26px;font-weight:800;color:#1a1a2e;letter-spacing:.08em;line-height:1.2;font-family:'Prompt',sans-serif}
-.wp-header .sub{font-size:11px;color:#555;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:3px}
-.wp-header .sep{color:#999;font-size:14px}
-.nav-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#475569;background:#f1f5f9;border-radius:8px;padding:6px 12px;text-decoration:none;border:1px solid #e2e8f0;white-space:nowrap}
+.wp-header{background:#fff;border-radius:10px;padding:7px 16px 6px;text-align:center;border:1px solid #e2e8f0;flex-shrink:0;position:relative}
+.wp-header h1{font-size:20px;font-weight:800;color:#1a1a2e;letter-spacing:.08em;line-height:1.2;font-family:'Prompt',sans-serif}
+.wp-header .sub{font-size:10px;color:#555;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:2px}
+.wp-header .sep{color:#999;font-size:13px}
+.nav-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#475569;background:#f1f5f9;border-radius:8px;padding:5px 11px;text-decoration:none;border:1px solid #e2e8f0;white-space:nowrap}
 
 /* ── GRID ── */
-#grid{flex:1;display:grid;grid-template-columns:repeat(7,1fr);gap:5px;align-items:start}
+#grid{flex:1 1 0;display:grid;grid-template-columns:repeat(7,1fr);gap:5px;min-height:0;overflow:hidden}
 
 /* ── DAY COLUMN ── */
-.dc{border-radius:10px;padding:5px;display:flex;flex-direction:column;gap:3px;border-width:2px;border-style:solid}
+.dc{border-radius:10px;padding:5px;display:flex;flex-direction:column;gap:3px;border-width:2px;border-style:solid;height:100%;overflow:hidden}
+
+/* last slot in each column expands to fill remaining space */
+.dc .sl:last-of-type{flex:1 1 0;min-height:0}
+.dc .nt{flex-shrink:0}
 
 /* ── DAY HEADER ── */
-.dh{border-radius:8px;text-align:center;padding:7px 4px 8px;margin-bottom:1px;border-width:1px;border-style:solid}
-.dn{font-weight:700;font-size:12px;line-height:1.2;font-family:'Prompt',sans-serif}
-.dt{font-weight:800;font-size:9px;letter-spacing:.06em;line-height:1.3;margin-top:1px;font-family:'Prompt',sans-serif}
-.di{font-size:22px;line-height:1.4;margin-top:3px}
+.dh{border-radius:8px;text-align:center;padding:6px 4px 7px;margin-bottom:1px;border-width:1px;border-style:solid;flex-shrink:0}
+.dn{font-weight:700;font-size:13px;line-height:1.2;font-family:'Prompt',sans-serif}
+.dt{font-weight:800;font-size:10px;letter-spacing:.05em;line-height:1.3;margin-top:1px;font-family:'Prompt',sans-serif}
+.di{font-size:20px;line-height:1.4;margin-top:2px}
 
 /* ── TIME SLOT ── */
-.sl{background:#fff;border-radius:6px;padding:4px 6px;border-width:1px;border-style:solid}
-.tm{font-weight:700;font-size:8px;line-height:1.3;display:flex;align-items:center;flex-wrap:wrap;gap:3px;margin-bottom:2px}
-.badge{font-size:7px;padding:1px 5px;border-radius:4px;font-weight:700;line-height:1.5;letter-spacing:.04em;flex-shrink:0}
-.sl ul{padding-left:11px;margin:0}
-.sl li{font-size:8px;line-height:1.45;color:#374151}
-.sl .tx{font-size:8px;color:#374151;line-height:1.45}
-.sl .fc{font-weight:700;font-size:8px;list-style:none;margin-left:-11px;padding-left:2px}
-.sl .si{font-size:7.5px;color:#6b7280;list-style:none;margin-left:-11px;padding-left:8px}
-.sub-note{font-size:7px;color:#9ca3af;display:block;margin-top:1px}
+.sl{background:#fff;border-radius:6px;padding:5px 7px;border-width:1px;border-style:solid;flex-shrink:0}
+.tm{font-weight:700;font-size:9.5px;line-height:1.3;display:flex;align-items:center;flex-wrap:wrap;gap:3px;margin-bottom:2px}
+.badge{font-size:8px;padding:1px 5px;border-radius:4px;font-weight:700;line-height:1.5;letter-spacing:.04em;flex-shrink:0}
+.sl ul{padding-left:12px;margin:0}
+.sl li{font-size:9px;line-height:1.5;color:#374151}
+.sl .tx{font-size:9px;color:#374151;line-height:1.5}
+.sl .fc{font-weight:700;font-size:9px;list-style:none;margin-left:-12px;padding-left:2px}
+.sl .si{font-size:8.5px;color:#6b7280;list-style:none;margin-left:-12px;padding-left:8px}
+.sub-note{font-size:8px;color:#9ca3af;display:block;margin-top:1px}
 
 /* ── NIGHT BLOCK ── */
 .nt{margin-top:2px;display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.ni{border-radius:4px;padding:2px 4px;background:rgba(255,255,255,0.6)}
-.ni .ntt{font-size:6.5px;opacity:.7;font-weight:500;display:block;white-space:nowrap}
-.ni .nta{font-size:7px;font-weight:600;display:block;line-height:1.3}
+.ni{border-radius:4px;padding:3px 5px;background:rgba(255,255,255,0.6)}
+.ni .ntt{font-size:7.5px;opacity:.7;font-weight:500;display:block;white-space:nowrap}
+.ni .nta{font-size:8px;font-weight:600;display:block;line-height:1.35}
 
 /* ── FOOTER ── */
-.wp-footer{background:#fff;border-radius:12px;padding:6px 12px;border:1px solid #e2e8f0;flex-shrink:0}
+.wp-footer{background:#fff;border-radius:10px;padding:5px 12px;border:1px solid #e2e8f0;flex-shrink:0}
 .kp-wrap{display:grid;grid-template-columns:auto 1fr 1fr 1fr 1fr;gap:8px;align-items:center}
-.kp-title{background:#1a1a2e;color:#fff;border-radius:8px;padding:8px 12px;font-weight:700;font-size:10px;text-align:center;line-height:1.5;white-space:nowrap;font-family:'Prompt',sans-serif}
+.kp-title{background:#1a1a2e;color:#fff;border-radius:8px;padding:7px 12px;font-weight:700;font-size:10px;text-align:center;line-height:1.5;white-space:nowrap;font-family:'Prompt',sans-serif}
 .kp-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:5px 9px;display:flex;align-items:center;gap:7px}
-.kp-icon{font-size:22px;flex-shrink:0}
-.kp-label{font-weight:700;font-size:9px;color:#1e293b;line-height:1.4;font-family:'Prompt',sans-serif}
-.kp-sub{font-size:8px;color:#64748b;line-height:1.4}
+.kp-icon{font-size:20px;flex-shrink:0}
+.kp-label{font-weight:700;font-size:9.5px;color:#1e293b;line-height:1.4;font-family:'Prompt',sans-serif}
+.kp-sub{font-size:8.5px;color:#64748b;line-height:1.4}
 
 /* ══════════ PALETTES ══════════ */
-/* MON – yellow/amber */
 .mon{background:#fffde7;border-color:#f9d342}
 .mon .dh{background:#fff8c5;border-color:#f9d342}
 .mon .dn{color:#7c5700}.mon .dt{color:#c47f00}
@@ -66,7 +69,6 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
 .mon .nt{border-top:1px solid #f9d342;padding-top:3px}
 .mon .ni{background:#fff8c5}
 
-/* TUE – blue */
 .tue{background:#e8f4fd;border-color:#64b5f6}
 .tue .dh{background:#d0eafb;border-color:#64b5f6}
 .tue .dn{color:#0d47a1}.tue .dt{color:#1565c0}
@@ -76,7 +78,6 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
 .tue .nt{border-top:1px solid #64b5f6;padding-top:3px}
 .tue .ni{background:#d0eafb}
 
-/* WED – green */
 .wed{background:#e8f5e9;border-color:#66bb6a}
 .wed .dh{background:#c8e6c9;border-color:#66bb6a}
 .wed .dn{color:#1b5e20}.wed .dt{color:#2e7d32}
@@ -86,7 +87,6 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
 .wed .nt{border-top:1px solid #66bb6a;padding-top:3px}
 .wed .ni{background:#c8e6c9}
 
-/* THU – purple */
 .thu{background:#f3e5f5;border-color:#ba68c8}
 .thu .dh{background:#e1bee7;border-color:#ba68c8}
 .thu .dn{color:#4a148c}.thu .dt{color:#6a1b9a}
@@ -96,7 +96,6 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
 .thu .nt{border-top:1px solid #ba68c8;padding-top:3px}
 .thu .ni{background:#e1bee7}
 
-/* FRI – cyan/sky */
 .fri{background:#e3f2fd;border-color:#4fc3f7}
 .fri .dh{background:#b3e5fc;border-color:#4fc3f7}
 .fri .dn{color:#01579b}.fri .dt{color:#0277bd}
@@ -106,7 +105,6 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
 .fri .nt{border-top:1px solid #4fc3f7;padding-top:3px}
 .fri .ni{background:#b3e5fc}
 
-/* SAT – indigo/lavender */
 .sat{background:#ede7f6;border-color:#9575cd}
 .sat .dh{background:#d1c4e9;border-color:#9575cd}
 .sat .dn{color:#311b92}.sat .dt{color:#4527a0}
@@ -116,7 +114,6 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
 .sat .nt{border-top:1px solid #9575cd;padding-top:3px}
 .sat .ni{background:#d1c4e9}
 
-/* SUN – rose/pink */
 .sun{background:#fce4ec;border-color:#f06292}
 .sun .dh{background:#f8bbd0;border-color:#f06292}
 .sun .dn{color:#880e4f}.sun .dt{color:#ad1457}
@@ -133,12 +130,10 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
 <!-- HEADER -->
 <div class="wp-header">
   <h1>WEEKLY PLAN – 7 DAYS OVERVIEW</h1>
-  <div style="text-align:center;margin:4px 0"><span style="display:inline-block;width:100px;height:1.5px;background:#ccc;vertical-align:middle"></span></div>
+  <div style="text-align:center;margin:3px 0"><span style="display:inline-block;width:100px;height:1.5px;background:#ccc;vertical-align:middle"></span></div>
   <div class="sub">
-    <span>วางแผนชีวิต</span>
-    <span class="sep">|</span>
-    <span>บริหารเวลา</span>
-    <span class="sep">|</span>
+    <span>วางแผนชีวิต</span><span class="sep">|</span>
+    <span>บริหารเวลา</span><span class="sep">|</span>
     <span>สร้างผลลัพธ์</span>
   </div>
   <a href="index.html" class="nav-btn">⬅ Dashboard</a>
@@ -154,59 +149,34 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
     <div class="dt">DESIGN DAY</div>
     <div class="di">🎨</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 08.30 – 10.00 <span class="badge">MORNING</span></div>
-    <ul>
-      <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
-      <li>ตอบเรื่องเร่งด่วน</li>
-      <li>จัดลำดับงานวันนี้</li>
-    </ul>
+    <ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🚿 10.00 – 11.00</div>
     <div class="tx">อาบน้ำ</div>
   </div>
-
   <div class="sl">
     <div class="tm">🎨 11.00 – 13.00</div>
-    <ul>
-      <li>Nuzen Studio</li>
-      <li>Design Direction</li>
-      <li>Concept Design</li>
-      <li>Review งานออกแบบ</li>
-      <li>พัฒนาบริการใหม่</li>
-    </ul>
+    <ul><li>Nuzen Studio</li><li>Design Direction</li><li>Concept Design</li><li>Review งานออกแบบ</li><li>พัฒนาบริการใหม่</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🍽️ 13.00 – 14.00</div>
     <div class="tx">อาหารกลางวัน<br>เดิน 10–15 นาที</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 14.00 – 15.00 <span class="badge">AFTERNOON</span></div>
-    <ul>
-      <li>ประชุม / ติดตามทีม</li>
-      <li>โทรศัพท์ / อนุมัติงาน</li>
-    </ul>
+    <ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">👨‍👩‍👧‍👦 15.00 – 17.00</div>
     <div class="tx">รับลูก อยู่กับลูกเต็มที่<span class="sub-note">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div>
   </div>
-
   <div class="sl">
     <div class="tm">📋 17.00 – 19.00 <span class="badge">EVENING</span></div>
-    <ul>
-      <li>ตรวจงาน / อ่านเอกสาร</li>
-      <li>ตอบแชท / วางแผนวันถัดไป</li>
-      <li class="fc">Focus: ปรับปรุงระบบบริษัท</li>
-    </ul>
+    <ul><li>ตรวจงาน / อ่านเอกสาร</li><li>ตอบแชท / วางแผนวันถัดไป</li><li class="fc">Focus: ปรับปรุงระบบบริษัท</li></ul>
   </div>
-
   <div class="nt">
     <div class="ni"><span class="ntt">19.00 – 19.30</span><span class="nta">🎓 เรียน ENG Online</span></div>
     <div class="ni"><span class="ntt">19.30 – 21.00</span><span class="nta">📖 อ่านหนังสือ / Youtube</span></div>
@@ -222,59 +192,35 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
     <div class="dt">CONSTRUCTION DAY</div>
     <div class="di">🏗️</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 08.30 – 10.00 <span class="badge">MORNING</span></div>
-    <ul>
-      <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
-      <li>ตอบเรื่องเร่งด่วน</li>
-      <li>จัดลำดับงานวันนี้</li>
-    </ul>
+    <ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🚿 10.00 – 11.00</div>
     <div class="tx">อาบน้ำ</div>
   </div>
-
   <div class="sl">
     <div class="tm">🏗️ 11.00 – 13.00</div>
-    <ul>
-      <li>Quiet Force</li>
-      <li>Site Review</li>
-      <li>Cost Control</li>
-      <li>Quality Control</li>
-      <li>ตรวจปัญหาโครงการ</li>
-    </ul>
+    <ul><li>Quiet Force</li><li>Site Review</li><li>Cost Control</li><li>Quality Control</li><li>ตรวจปัญหาโครงการ</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🍽️ 13.00 – 14.00</div>
     <div class="tx">อาหารกลางวัน<br>เดิน 10–15 นาที</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 14.00 – 15.00 <span class="badge">AFTERNOON</span></div>
-    <ul>
-      <li>ประชุม / ติดตามทีม</li>
-      <li>โทรศัพท์ / อนุมัติงาน</li>
-      <li class="fc">Focus: ติดตามโปรเจ็คแมน</li>
-    </ul>
+    <ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="fc">Focus: ติดตามโปรเจ็คแมน</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">👨‍👩‍👧‍👦 15.00 – 17.00</div>
     <div class="tx">รับลูก อยู่กับลูกเต็มที่<span class="sub-note">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div>
   </div>
-
   <div class="sl">
     <div class="tm">📋 17.00 – 19.00 <span class="badge">EVENING</span></div>
-    <ul>
-      <li>ตรวจงาน / อ่านเอกสาร / ตอบแชท</li>
-    </ul>
-    <div class="tx" style="font-size:7.5px;margin-top:2px">17.20 – 18.40 เดินออกกำลังกาย</div>
+    <ul><li>ตรวจงาน / อ่านเอกสาร / ตอบแชท</li></ul>
+    <div class="tx" style="font-size:8.5px;margin-top:2px">17.20 – 18.40 เดินออกกำลังกาย</div>
   </div>
-
   <div class="nt">
     <div class="ni"><span class="ntt">19.00 – 19.30</span><span class="nta">🎓 เรียน ENG Online</span></div>
     <div class="ni"><span class="ntt">19.30 – 21.00</span><span class="nta">📖 อ่านหนังสือ / Youtube</span></div>
@@ -290,62 +236,39 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
     <div class="dt">MONEY DAY</div>
     <div class="di">💰</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 08.30 – 10.00 <span class="badge">MORNING</span></div>
-    <ul>
-      <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
-      <li>ตอบเรื่องเร่งด่วน</li>
-      <li>จัดลำดับงานวันนี้</li>
-    </ul>
+    <ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🚿 10.00 – 11.00</div>
     <div class="tx">อาบน้ำ</div>
   </div>
-
   <div class="sl">
     <div class="tm">💰 11.00 – 13.00</div>
-    <ul>
-      <li>การเงินทั้งหมด</li>
-      <li>Cash Flow</li>
-      <li>รายรับรายจ่าย</li>
-      <li>หนี้สิน</li>
-      <li>งบการเงิน</li>
-    </ul>
+    <ul><li>การเงินทั้งหมด</li><li>Cash Flow</li><li>รายรับรายจ่าย</li><li>หนี้สิน</li><li>งบการเงิน</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🍽️ 13.00 – 14.00</div>
     <div class="tx">อาหารกลางวัน<br>เดิน 10–15 นาที</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 14.00 – 15.00 <span class="badge">AFTERNOON</span></div>
     <ul>
-      <li>ประชุม / ติดตามทีม</li>
-      <li>โทรศัพท์ / อนุมัติงาน</li>
+      <li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li>
       <li class="fc">Focus: การลงทุน</li>
       <li class="si">· หุ้นไทย / หุ้นต่างประเทศ</li>
       <li class="si">· Bitcoin / Asset Allocation</li>
     </ul>
   </div>
-
   <div class="sl">
     <div class="tm">👨‍👩‍👧‍👦 15.00 – 17.00</div>
     <div class="tx">รับลูก อยู่กับลูกเต็มที่<span class="sub-note">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div>
   </div>
-
   <div class="sl">
     <div class="tm">📋 17.00 – 19.00 <span class="badge">EVENING</span></div>
-    <ul>
-      <li>ตรวจงาน / อ่านเอกสาร</li>
-      <li>ตอบแชท / วางแผนวันถัดไป</li>
-      <li class="fc">Focus: ปรับปรุงระบบบริษัท</li>
-    </ul>
+    <ul><li>ตรวจงาน / อ่านเอกสาร</li><li>ตอบแชท / วางแผนวันถัดไป</li><li class="fc">Focus: ปรับปรุงระบบบริษัท</li></ul>
   </div>
-
   <div class="nt">
     <div class="ni"><span class="ntt">19.00 – 19.30</span><span class="nta">🎓 เรียน ENG Online</span></div>
     <div class="ni"><span class="ntt">19.30 – 21.00</span><span class="nta">▶️ ทำข้อมูลผ่าน Youtube</span></div>
@@ -361,62 +284,38 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
     <div class="dt">GROWTH DAY</div>
     <div class="di">📈</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 08.30 – 10.00 <span class="badge">MORNING</span></div>
-    <ul>
-      <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
-      <li>ตอบเรื่องเร่งด่วน</li>
-      <li>จัดลำดับงานวันนี้</li>
-    </ul>
+    <ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🚿 10.00 – 11.00</div>
     <div class="tx">อาบน้ำ</div>
   </div>
-
   <div class="sl">
     <div class="tm">📈 11.00 – 13.00</div>
-    <ul>
-      <li>ธุรกิจใหม่</li>
-      <li>Cafe Sandwich</li>
-      <li>Camp คูนาย</li>
-      <li>Parking</li>
-      <li>Land Development</li>
-    </ul>
+    <ul><li>ธุรกิจใหม่</li><li>Cafe Sandwich</li><li>Camp คูนาย</li><li>Parking</li><li>Land Development</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🍽️ 13.00 – 14.00</div>
     <div class="tx">อาหารกลางวัน<br>เดิน 10–15 นาที</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 14.00 – 15.00 <span class="badge">AFTERNOON</span></div>
-    <ul>
-      <li>ประชุม / ติดตามทีม</li>
-      <li>โทรศัพท์ / อนุมัติงาน</li>
-      <li class="fc">Focus: คู่ค้า / นักลงทุน / พันธมิตร</li>
-    </ul>
+    <ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="fc">Focus: คู่ค้า / นักลงทุน / พันธมิตร</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">👨‍👩‍👧‍👦 15.00 – 17.00</div>
     <div class="tx">รับลูก อยู่กับลูกเต็มที่<span class="sub-note">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div>
   </div>
-
   <div class="sl">
     <div class="tm">📋 17.00 – 19.20 <span class="badge">EVENING</span></div>
-    <ul>
-      <li>ตรวจงาน / อ่านเอกสาร / ตอบแชท</li>
-    </ul>
-    <div class="tx" style="font-size:7.5px;margin-top:2px">17.20 – 18.40 เดินออกกำลังกาย</div>
+    <ul><li>ตรวจงาน / อ่านเอกสาร / ตอบแชท</li></ul>
+    <div class="tx" style="font-size:8.5px;margin-top:2px">17.20 – 18.40 เดินออกกำลังกาย</div>
   </div>
-
   <div class="nt">
     <div class="ni"><span class="ntt">19.00 – 19.30</span><span class="nta">🎓 เรียน ENG Online</span></div>
-    <div class="ni"><span class="ntt">19.30 – 21.00</span><span class="nta">▶️ ทำข้อมูลผ่าน Youtube Focus: ปรับบริษัท</span></div>
+    <div class="ni"><span class="ntt">19.30 – 21.00</span><span class="nta">▶️ Youtube Focus: ปรับบริษัท</span></div>
     <div class="ni"><span class="ntt">21.00 – 21.45</span><span class="nta">🛁 อาบน้ำ</span></div>
     <div class="ni"><span class="ntt">21.45 – 22.00</span><span class="nta">🛌 เตรียมตัวนอน</span></div>
   </div>
@@ -429,69 +328,38 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
     <div class="dt">OWNER DAY</div>
     <div class="di">👑</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 08.30 – 10.00 <span class="badge">MORNING</span></div>
-    <ul>
-      <li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li>
-      <li>ตอบเรื่องเร่งด่วน</li>
-      <li>จัดลำดับงานวันนี้</li>
-    </ul>
+    <ul><li>เช็กภาพรวมธุรกิจ – ดูรายงาน</li><li>ตอบเรื่องเร่งด่วน</li><li>จัดลำดับงานวันนี้</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🚿 10.00 – 11.00</div>
     <div class="tx">อาบน้ำ</div>
   </div>
-
   <div class="sl">
     <div class="tm">👑 11.00 – 13.00</div>
-    <ul>
-      <li>เรื่องเจ้าของกิจการ</li>
-      <li>คดีความ</li>
-      <li>เอกสาร</li>
-      <li>หนาย</li>
-      <li>หุ้นส่วน</li>
-      <li>ความเสี่ยง</li>
-    </ul>
+    <ul><li>เรื่องเจ้าของกิจการ</li><li>คดีความ</li><li>เอกสาร</li><li>หนาย</li><li>หุ้นส่วน</li><li>ความเสี่ยง</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🍽️ 13.00 – 14.00</div>
     <div class="tx">อาหารกลางวัน<br>เดิน 10–15 นาที</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ 14.00 – 15.00 <span class="badge">AFTERNOON</span></div>
-    <ul>
-      <li>ประชุม / ติดตามทีม</li>
-      <li>โทรศัพท์ / อนุมัติงาน</li>
-      <li class="fc">Focus: Review ทั้งสัปดาห์</li>
-    </ul>
+    <ul><li>ประชุม / ติดตามทีม</li><li>โทรศัพท์ / อนุมัติงาน</li><li class="fc">Focus: Review ทั้งสัปดาห์</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🔍 13.00 – 15.00</div>
-    <ul>
-      <li>ดูที่ดิน / ดูโครงการ</li>
-      <li>สำรวจโอกาส</li>
-    </ul>
+    <ul><li>ดูที่ดิน / ดูโครงการ</li><li>สำรวจโอกาส</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">👨‍👩‍👧‍👦 15.00 – 17.00</div>
     <div class="tx">รับลูก อยู่กับลูกเต็มที่<span class="sub-note">(งานเฉพาะถูกเถลิงเท่านั้น)</span></div>
   </div>
-
   <div class="sl">
     <div class="tm">📋 17.00 – 19.00 <span class="badge">EVENING</span></div>
-    <ul>
-      <li>ตรวจงาน / อ่านเอกสาร</li>
-      <li>ตอบแชท / วางแผนวันถัดไป</li>
-      <li class="fc">Focus: ปรับปรุงระบบบริษัท</li>
-    </ul>
+    <ul><li>ตรวจงาน / อ่านเอกสาร</li><li>ตอบแชท / วางแผนวันถัดไป</li><li class="fc">Focus: ปรับปรุงระบบบริษัท</li></ul>
   </div>
-
   <div class="nt">
     <div class="ni"><span class="ntt">19.00 – 19.30</span><span class="nta">🎓 เรียน ENG Online</span></div>
     <div class="ni"><span class="ntt">19.30 – 21.00</span><span class="nta">📖 หาข้อมูลผ่าน Youtube</span></div>
@@ -507,47 +375,26 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
     <div class="dt">FUTURE DAY</div>
     <div class="di">🚀</div>
   </div>
-
   <div class="sl">
     <div class="tm">🏃 07.00 – 08.30</div>
     <div class="tx">เดินออกกำลังกาย</div>
   </div>
-
   <div class="sl">
     <div class="tm">🚿 10.00 – 11.00</div>
     <div class="tx">อาบน้ำ</div>
   </div>
-
   <div class="sl">
     <div class="tm">📚 11.00 – 13.00</div>
-    <ul>
-      <li>ศึกษาการลงทุน</li>
-      <li>อสังหา</li>
-      <li>AI</li>
-      <li>ธุรกิจใหม่</li>
-    </ul>
+    <ul><li>ศึกษาการลงทุน</li><li>อสังหา</li><li>AI</li><li>ธุรกิจใหม่</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">🔍 13.00 – 15.00</div>
-    <ul>
-      <li>ดูที่ดิน / ดูโครงการ</li>
-      <li>สำรวจโอกาส</li>
-    </ul>
+    <ul><li>ดูที่ดิน / ดูโครงการ</li><li>สำรวจโอกาส</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">📱 15.00 – 17.00</div>
-    <ul>
-      <li>Personal Branding</li>
-      <li>Facebook</li>
-      <li>Instagram / Tiktok</li>
-      <li>ถ่ายรูป</li>
-      <li>ทำ Content</li>
-      <li>ภาษาอังกฤษ</li>
-    </ul>
+    <ul><li>Personal Branding</li><li>Facebook</li><li>Instagram / Tiktok</li><li>ถ่ายรูป</li><li>ทำ Content</li><li>ภาษาอังกฤษ</li></ul>
   </div>
-
   <div class="nt">
     <div class="ni"><span class="ntt">19.00 – 19.30</span><span class="nta">🎓 เรียน ENG Online</span></div>
     <div class="ni"><span class="ntt">19.30 – 21.00</span><span class="nta">📖 อ่านหนังสือ / Youtube</span></div>
@@ -563,34 +410,18 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
     <div class="dt">RECOVERY DAY</div>
     <div class="di">🌿</div>
   </div>
-
   <div class="sl">
     <div class="tm">☀️ เช้า (Morning)</div>
-    <ul>
-      <li>ดู Youtube ความรู้</li>
-      <li>อาหารเช้า</li>
-      <li>กาแฟ / อ่านหนังสือ</li>
-    </ul>
+    <ul><li>ดู Youtube ความรู้</li><li>อาหารเช้า</li><li>กาแฟ / อ่านหนังสือ</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">👨‍👩‍👧‍👦 กลางวัน (Midday)</div>
-    <ul>
-      <li>ลูก</li>
-      <li>คนรัก</li>
-      <li>ญาติพี่น้อง</li>
-    </ul>
+    <ul><li>ลูก</li><li>คนรัก</li><li>ญาติพี่น้อง</li></ul>
   </div>
-
   <div class="sl">
     <div class="tm">❤️ เย็น (Evening)</div>
-    <ul>
-      <li>เดินออกกำลังกาย</li>
-      <li>วางแผนสัปดาห์ 30 นาที</li>
-      <li>เตรียมเป้าหมายสัปดาห์ใหม่</li>
-    </ul>
+    <ul><li>เดินออกกำลังกาย</li><li>วางแผนสัปดาห์ 30 นาที</li><li>เตรียมเป้าหมายสัปดาห์ใหม่</li></ul>
   </div>
-
   <div class="nt">
     <div class="ni"><span class="ntt">19.00 – 19.30</span><span class="nta">🎓 เรียน ENG Online</span></div>
     <div class="ni"><span class="ntt">19.30 – 21.00</span><span class="nta">📖 อ่านหนังสือ / ดู Youtube</span></div>
@@ -601,37 +432,25 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;min-heigh
 
 </div><!-- /grid -->
 
-<!-- FOOTER KEY PRINCIPLES -->
+<!-- FOOTER -->
 <div class="wp-footer">
   <div class="kp-wrap">
     <div class="kp-title">KEY<br>PRINCIPLES</div>
     <div class="kp-item">
       <span class="kp-icon">🕐</span>
-      <div>
-        <div class="kp-label">เวลาทอง</div>
-        <div class="kp-sub">08.30 – 13.00<br>โฟกัสงานสำคัญที่สุด</div>
-      </div>
+      <div><div class="kp-label">เวลาทอง</div><div class="kp-sub">08.30 – 13.00<br>โฟกัสงานสำคัญที่สุด</div></div>
     </div>
     <div class="kp-item">
       <span class="kp-icon">👨‍👩‍👧‍👦</span>
-      <div>
-        <div class="kp-label">ครอบครัวคืออันดับ 1</div>
-        <div class="kp-sub">15.00 – 17.00<br>อยู่กับครอบครัวเต็มที่</div>
-      </div>
+      <div><div class="kp-label">ครอบครัวคืออันดับ 1</div><div class="kp-sub">15.00 – 17.00<br>อยู่กับครอบครัวเต็มที่</div></div>
     </div>
     <div class="kp-item">
       <span class="kp-icon">📚</span>
-      <div>
-        <div class="kp-label">พัฒนาตัวเองทุกวัน</div>
-        <div class="kp-sub">19.00 เป็นต้นไป<br>เรียนรู้ / อ่านหนังสือ / วางแผน</div>
-      </div>
+      <div><div class="kp-label">พัฒนาตัวเองทุกวัน</div><div class="kp-sub">19.00 เป็นต้นไป<br>เรียนรู้ / อ่านหนังสือ / วางแผน</div></div>
     </div>
     <div class="kp-item">
       <span class="kp-icon">🎯</span>
-      <div>
-        <div class="kp-label">ทบทวนทุกวัน</div>
-        <div class="kp-sub">วางแผน – ลงมือทำ – ตรวจสอบ<br>ปรับปรุง – พัฒนา</div>
-      </div>
+      <div><div class="kp-label">ทบทวนทุกวัน</div><div class="kp-sub">วางแผน – ลงมือทำ – ตรวจสอบ<br>ปรับปรุง – พัฒนา</div></div>
     </div>
   </div>
 </div>
