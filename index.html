@@ -25,69 +25,65 @@
     }
   </script>
   <style>
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
       font-family: 'Prompt', sans-serif;
-      background-color: #E9EEF3;
+      background-color: #CBD5E1; /* สีขอบด้านนอก */
       color: #1a1a1a;
-      /* ให้ body เต็มหน้าจอแต่ไม่ scroll */
       height: 100vh;
       overflow: hidden;
-      margin: 0;
-      padding: 0;
     }
 
-    /* wrapper เต็มหน้าจอ */
+    /* Outer wrapper — มี padding ซ้ายขวาบนล่าง สร้างช่องว่างรอบ dashboard */
     .dash-wrapper {
       height: 100vh;
       display: flex;
-      flex-direction: column;
-      padding: 6px;
-      gap: 0;
+      align-items: stretch;
+      padding: 10px 200px; /* บนล่าง 10px | ซ้ายขวา 28px */
     }
 
-    /* card หลัก flex column เต็มความสูง */
+    /* Card หลัก */
     .dash-card {
       flex: 1;
       display: flex;
       flex-direction: column;
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 24px rgba(0,0,0,.10);
-      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      box-shadow: 0 6px 32px rgba(0,0,0,.18);
+      border: 1px solid #94a3b8;
       overflow: hidden;
       min-height: 0;
     }
 
-    /* main grid กินพื้นที่ที่เหลือ */
+    /* Main 3-column grid */
     .dash-main {
       flex: 1;
       display: grid;
       grid-template-columns: 3fr 5fr 4fr;
-      gap: 10px;
-      padding: 10px;
+      gap: 8px;
+      padding: 8px;
       background: #E9EEF3;
       overflow: hidden;
       min-height: 0;
     }
 
-    /* แต่ละคอลัมน์ scroll ได้ภายในตัวเอง */
+    /* แต่ละ column scroll ภายในตัวเอง */
     .dash-col {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       overflow-y: auto;
       min-height: 0;
     }
-    .dash-col::-webkit-scrollbar { width: 4px; }
+    .dash-col::-webkit-scrollbar { width: 3px; }
     .dash-col::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
 
-    /* footer KPI แนบชิดล่าง */
+    /* KPI footer ติดล่างเสมอ */
     .dash-footer {
       background: #f8fafc;
       border-top: 1px solid #e2e8f0;
-      padding: 8px 12px 6px;
+      padding: 7px 12px 5px;
       flex-shrink: 0;
     }
 
@@ -104,14 +100,12 @@
     .progress-bar-fill  { transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
   </style>
 
-  <!-- ข้อมูลกลาง -->
   <script src="data/dashboard-data.js"></script>
 </head>
 <body>
-<div class="dash-wrapper animate-fade-in">
 
-  <!-- ════════════════ CARD หลัก ════════════════ -->
-  <div class="dash-card">
+<div class="dash-wrapper">
+  <div class="dash-card animate-fade-in">
 
     <!-- 1. HEADER -->
     <header id="comp-header"
@@ -130,7 +124,7 @@
 
       <!-- MIDDLE (5fr) -->
       <div class="dash-col">
-        <div data-component="components/tasks.html" style="flex:1;min-height:0;"></div>
+        <div data-component="components/tasks.html" style="flex:1;min-height:0;display:flex;flex-direction:column;"></div>
       </div>
 
       <!-- RIGHT (4fr) -->
@@ -142,16 +136,13 @@
 
     </div>
 
-    <!-- 3. KPI FOOTER — ติดล่างเสมอ -->
+    <!-- 3. KPI FOOTER -->
     <div class="dash-footer" data-component="components/kpi-footer.html"></div>
 
-  </div><!-- /dash-card -->
+  </div>
+</div>
 
-</div><!-- /dash-wrapper -->
-
-<!-- Engine -->
 <script>
-  // Header
   (function renderHeader() {
     const d = DASHBOARD_DATA;
     document.getElementById('comp-header').innerHTML = `
@@ -171,7 +162,6 @@
       </div>`;
   })();
 
-  // Component loader
   async function loadComponent(el) {
     const src = el.getAttribute('data-component');
     try {
@@ -181,13 +171,19 @@
       const scripts = [...tmp.querySelectorAll('script')];
       scripts.forEach(s => s.remove());
       el.innerHTML = tmp.innerHTML;
+      // ถ้า placeholder มี style flex ให้ส่งต่อไปยัง child แรก
+      const firstChild = el.firstElementChild;
+      if (firstChild && el.style.display === 'flex') {
+        firstChild.style.flex = '1';
+        firstChild.style.minHeight = '0';
+      }
       scripts.forEach(s => {
         const ns = document.createElement('script');
         ns.textContent = s.textContent;
         document.body.appendChild(ns);
       });
     } catch(e) {
-      el.innerHTML = `<div class="text-red-400 text-xs p-2">⚠ โหลด ${src} ไม่สำเร็จ</div>`;
+      el.innerHTML = `<div style="color:#f87171;font-size:11px;padding:6px;">⚠ โหลด ${src} ไม่สำเร็จ</div>`;
     }
   }
 
