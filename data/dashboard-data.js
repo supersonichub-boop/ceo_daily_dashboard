@@ -12,8 +12,8 @@ const DASHBOARD_DATA = {
   // ── CASH & LIQUIDITY ────────────────────────────────
   cash: {
     current:   2060.00,          // เงินสดคงเหลือ
-    inflow7d:  550000.00,        // เงินเข้าคาดการณ์ 7 วัน
-    outflow7d: 450000.00,        // เงินออกคาดการณ์ 7 วัน
+    inflow7d:  200000.00,        // เงินเข้าคาดการณ์ 7 วัน
+    outflow7d: 50000.00,        // เงินออกคาดการณ์ 7 วัน
     // สถานะ: "ดี" | "ระวัง" | "วิกฤต"
     status: "ระวัง"
   },
@@ -80,14 +80,14 @@ const DASHBOARD_DATA = {
   decisionItems: [
     // ─ QFC ─
     { group: "QFC" },
-    { label: "หนี้เก่า CMI",                  amount: 10000.00 },
-    { label: "หนี้เก่าคอนกรีต TPI",           amount: 10000.00 },
-    { label: "ย่าตุ๊",                         amount: 20000.00 },
-    { label: "โคกคลอย",                        amount: 20000.00 },
-    { label: "เชิงทะเล",                        amount: 10000.00 },
-    { label: "ฉลองคอนกรีต (CLC)",             amount: 0 },
-    { label: "หนี้เก่าพี่ยุ้ย",               amount: 5000.00 },
-    { label: "ประกันสังคม MD",                 amount: 1500.00 },
+    // { label: "หนี้เก่า CMI",                  amount: 10000.00 },
+    // { label: "หนี้เก่าคอนกรีต TPI",           amount: 10000.00 },
+    // { label: "ย่าตุ๊",                         amount: 20000.00 },
+    // { label: "โคกคลอย",                        amount: 20000.00 },
+    // { label: "เชิงทะเล",                        amount: 10000.00 },
+    // { label: "ฉลองคอนกรีต (CLC)",             amount: 0 },
+    // { label: "หนี้เก่าพี่ยุ้ย",               amount: 5000.00 },
+    // { label: "ประกันสังคม MD",                 amount: 1500.00 },
     { label: "ค่าเช่าที่ดิน",                  amount: 36000.00 },
     { label: "ค่าบริการรถเครน 25 ตัน 7/9/69", amount: 7280.00 },
     // ─ NZN ─
@@ -105,7 +105,7 @@ const DASHBOARD_DATA = {
     {
       level: "amber",
       title: "ลูกหนี้ WLY",
-      overdue: 4637158.86   // ค้างชำระ (บาท) ใส่ 0 เพื่อซ่อน
+      overdue: 4230635.51   // ค้างชำระ (บาท) ใส่ 0 เพื่อซ่อน
     },
     {
       level: "red",
