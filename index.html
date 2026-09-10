@@ -143,6 +143,15 @@
 </div>
 
 <script>
+  // วันที่วันนี้แบบไทย (อ้างอิงวันที่จริงของเครื่องเสมอ ไม่ต้องแก้ในไฟล์ข้อมูล)
+  function getThaiDateToday() {
+    const months = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน",
+                     "กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"];
+    const now = new Date();
+    const buddhistYear = now.getFullYear() + 543;
+    return `${now.getDate()} ${months[now.getMonth()]} ${buddhistYear}`;
+  }
+
   (function renderHeader() {
     const d = DASHBOARD_DATA;
     document.getElementById('comp-header').innerHTML = `
@@ -153,7 +162,7 @@
       <div class="flex items-center gap-2">
         <div class="bg-[#162D4A] px-3 py-1 rounded-md border border-slate-600/50 flex items-center gap-2 text-sm font-semibold">
           <i class="fa-regular fa-calendar-days text-sky-400"></i>
-          <span>${d.date}</span>
+          <span>${getThaiDateToday()}</span>
         </div>
         <a href="weekly-plan.html"
            class="px-3 py-1.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold shadow-sm flex items-center gap-2">
