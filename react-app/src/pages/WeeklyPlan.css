@@ -1,0 +1,117 @@
+*{box-sizing:border-box;margin:0;padding:0}
+.weekly-plan-page,.weekly-plan-page *{box-sizing:border-box}
+.weekly-plan-page{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;height:100vh;overflow:hidden}
+#app{width:100vw;height:100vh;display:flex;flex-direction:column;padding:6px;gap:5px}
+
+/* ── HEADER ── */
+.wp-header{background:#fff;border-radius:10px;padding:7px 16px 6px;text-align:center;border:1px solid #e2e8f0;flex-shrink:0;position:relative}
+.wp-header h1{font-size:20px;font-weight:800;color:#1a1a2e;letter-spacing:.08em;line-height:1.2;font-family:'Prompt',sans-serif}
+.wp-header .sub{font-size:10px;color:#555;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:2px}
+.wp-header .sep{color:#999;font-size:13px}
+.nav-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#475569;background:#f1f5f9;border-radius:8px;padding:5px 11px;text-decoration:none;border:1px solid #e2e8f0;white-space:nowrap}
+
+/* ── GRID ── */
+#grid{flex:1 1 0;display:grid;grid-template-columns:repeat(7,1fr);gap:5px;min-height:0;overflow:hidden}
+
+/* ── DAY COLUMN ── */
+.dc{border-radius:10px;padding:5px;display:flex;flex-direction:column;gap:3px;border-width:2px;border-style:solid;height:100%;overflow:hidden}
+
+/* last slot in each column expands to fill remaining space */
+.dc .sl:last-of-type{flex:1 1 0;min-height:0}
+.dc .nt{flex-shrink:0}
+
+/* ── DAY HEADER ── */
+.dh{border-radius:8px;text-align:center;padding:6px 4px 7px;margin-bottom:1px;border-width:1px;border-style:solid;flex-shrink:0}
+.dn{font-weight:700;font-size:13px;line-height:1.2;font-family:'Prompt',sans-serif}
+.dt{font-weight:800;font-size:10px;letter-spacing:.05em;line-height:1.3;margin-top:1px;font-family:'Prompt',sans-serif}
+.di{font-size:20px;line-height:1.4;margin-top:2px}
+
+/* ── TIME SLOT ── */
+.sl{background:#fff;border-radius:6px;padding:5px 7px;border-width:1px;border-style:solid;flex-shrink:0}
+.tm{font-weight:700;font-size:9.5px;line-height:1.3;display:flex;align-items:center;flex-wrap:wrap;gap:3px;margin-bottom:2px}
+.badge{font-size:8px;padding:1px 5px;border-radius:4px;font-weight:700;line-height:1.5;letter-spacing:.04em;flex-shrink:0}
+.sl ul{padding-left:12px;margin:0}
+.sl li{font-size:9px;line-height:1.5;color:#374151}
+.sl .tx{font-size:9px;color:#374151;line-height:1.5}
+.sl .fc{font-weight:700;font-size:9px;list-style:none;margin-left:-12px;padding-left:2px}
+.sl .si{font-size:8.5px;color:#6b7280;list-style:none;margin-left:-12px;padding-left:8px}
+.sub-note{font-size:8px;color:#9ca3af;display:block;margin-top:1px}
+
+/* ── NIGHT BLOCK ── */
+.nt{margin-top:2px;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.ni{border-radius:4px;padding:3px 5px;background:rgba(255,255,255,0.6)}
+.ni .ntt{font-size:7.5px;opacity:.7;font-weight:500;display:block;white-space:nowrap}
+.ni .nta{font-size:8px;font-weight:600;display:block;line-height:1.35}
+
+/* ── FOOTER ── */
+.wp-footer{background:#fff;border-radius:10px;padding:5px 12px;border:1px solid #e2e8f0;flex-shrink:0}
+.kp-wrap{display:grid;grid-template-columns:auto 1fr 1fr 1fr 1fr;gap:8px;align-items:center}
+.kp-title{background:#1a1a2e;color:#fff;border-radius:8px;padding:7px 12px;font-weight:700;font-size:10px;text-align:center;line-height:1.5;white-space:nowrap;font-family:'Prompt',sans-serif}
+.kp-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:5px 9px;display:flex;align-items:center;gap:7px}
+.kp-icon{font-size:20px;flex-shrink:0}
+.kp-label{font-weight:700;font-size:9.5px;color:#1e293b;line-height:1.4;font-family:'Prompt',sans-serif}
+.kp-sub{font-size:8.5px;color:#64748b;line-height:1.4}
+
+/* ══════════ PALETTES ══════════ */
+.mon{background:#fffde7;border-color:#f9d342}
+.mon .dh{background:#fff8c5;border-color:#f9d342}
+.mon .dn{color:#7c5700}.mon .dt{color:#c47f00}
+.mon .sl{border-color:rgba(249,211,66,.35)}.mon .tm{color:#b45309}
+.mon .badge{background:#fff3c4;color:#7c5700}
+.mon .fc{color:#b45309}
+.mon .nt{border-top:1px solid #f9d342;padding-top:3px}
+.mon .ni{background:#fff8c5}
+
+.tue{background:#e8f4fd;border-color:#64b5f6}
+.tue .dh{background:#d0eafb;border-color:#64b5f6}
+.tue .dn{color:#0d47a1}.tue .dt{color:#1565c0}
+.tue .sl{border-color:rgba(100,181,246,.35)}.tue .tm{color:#1565c0}
+.tue .badge{background:#d0eafb;color:#0d47a1}
+.tue .fc{color:#1565c0}
+.tue .nt{border-top:1px solid #64b5f6;padding-top:3px}
+.tue .ni{background:#d0eafb}
+
+.wed{background:#e8f5e9;border-color:#66bb6a}
+.wed .dh{background:#c8e6c9;border-color:#66bb6a}
+.wed .dn{color:#1b5e20}.wed .dt{color:#2e7d32}
+.wed .sl{border-color:rgba(102,187,106,.35)}.wed .tm{color:#2e7d32}
+.wed .badge{background:#c8e6c9;color:#1b5e20}
+.wed .fc{color:#2e7d32}
+.wed .nt{border-top:1px solid #66bb6a;padding-top:3px}
+.wed .ni{background:#c8e6c9}
+
+.thu{background:#f3e5f5;border-color:#ba68c8}
+.thu .dh{background:#e1bee7;border-color:#ba68c8}
+.thu .dn{color:#4a148c}.thu .dt{color:#6a1b9a}
+.thu .sl{border-color:rgba(186,104,200,.35)}.thu .tm{color:#6a1b9a}
+.thu .badge{background:#e1bee7;color:#4a148c}
+.thu .fc{color:#6a1b9a}
+.thu .nt{border-top:1px solid #ba68c8;padding-top:3px}
+.thu .ni{background:#e1bee7}
+
+.fri{background:#e3f2fd;border-color:#4fc3f7}
+.fri .dh{background:#b3e5fc;border-color:#4fc3f7}
+.fri .dn{color:#01579b}.fri .dt{color:#0277bd}
+.fri .sl{border-color:rgba(79,195,247,.35)}.fri .tm{color:#0277bd}
+.fri .badge{background:#b3e5fc;color:#01579b}
+.fri .fc{color:#0277bd}
+.fri .nt{border-top:1px solid #4fc3f7;padding-top:3px}
+.fri .ni{background:#b3e5fc}
+
+.sat{background:#ede7f6;border-color:#9575cd}
+.sat .dh{background:#d1c4e9;border-color:#9575cd}
+.sat .dn{color:#311b92}.sat .dt{color:#4527a0}
+.sat .sl{border-color:rgba(149,117,205,.35)}.sat .tm{color:#4527a0}
+.sat .badge{background:#d1c4e9;color:#311b92}
+.sat .fc{color:#4527a0}
+.sat .nt{border-top:1px solid #9575cd;padding-top:3px}
+.sat .ni{background:#d1c4e9}
+
+.sun{background:#fce4ec;border-color:#f06292}
+.sun .dh{background:#f8bbd0;border-color:#f06292}
+.sun .dn{color:#880e4f}.sun .dt{color:#ad1457}
+.sun .sl{border-color:rgba(240,98,146,.35)}.sun .tm{color:#ad1457}
+.sun .badge{background:#f8bbd0;color:#880e4f}
+.sun .fc{color:#ad1457}
+.sun .nt{border-top:1px solid #f06292;padding-top:3px}
+.sun .ni{background:#f8bbd0}
