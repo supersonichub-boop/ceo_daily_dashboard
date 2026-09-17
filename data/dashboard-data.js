@@ -39,7 +39,7 @@ const DASHBOARD_DATA = {
 
   // ── TODAY SCHEDULE ──────────────────────────────────
   schedule: [
-    { title: "ติดตามเงินค่าแรง" }
+    // { title: "ติดตามเงินค่าแรง" }
     // เพิ่มนัดตรงนี้: { time: "09.00น.", title: "..." }
   ],
 
@@ -121,7 +121,7 @@ const DASHBOARD_DATA = {
 
   // ── APPOINTMENTS (นัดหมายสำคัญ) ──────────────────
   appointments: [
-    { time: "19.00น.", title: "พบ CEO บ.จระเข้" }
+    // { time: "19.00น.", title: "พบ CEO บ.จระเข้" }
     // เพิ่มนัดตรงนี้
   ],
 
