@@ -37,21 +37,21 @@ export default function CompaniesOverview() {
       </div>
       <div className="p-3 text-xs sm:text-sm">
         <div className="grid grid-cols-12 text-slate-500 font-medium text-[11px] pb-1.5 border-b mb-2">
-          <div className="col-span-4">บริษัท</div>
+          <div className="col-span-5">บริษัท</div>
           <div className="col-span-5 text-center">ความคืบหน้าโครงการ</div>
-          <div className="col-span-3 text-right">สถานะ</div>
+          <div className="col-span-2 text-right">สถานะ</div>
         </div>
         {companies.map((c) => {
           const dot = DOT_MAP[c.dot_color] || 'bg-amber-400'
           const detailLines = (c.detail || '').split('\n').filter(Boolean)
           return (
             <div key={c.id} className="grid grid-cols-12 items-center mb-3 last:mb-0 group">
-              <div className="col-span-4 flex items-center gap-1.5">
-                <span className="bg-slate-900 text-white font-bold text-[9px] p-1 rounded leading-none">
+              <div className="col-span-5 flex items-center gap-1.5">
+                <span className="bg-slate-900 text-white font-bold text-[9px] p-1 rounded leading-none shrink-0">
                   {c.tag}
                 </span>
-                <div>
-                  <div className="font-semibold text-slate-800 text-xs">{c.name}</div>
+                <div className="min-w-0">
+                  <div className="font-semibold text-slate-800 text-xs whitespace-nowrap">{c.name}</div>
                   <div className="text-[9px] text-slate-400 leading-tight">
                     {detailLines.map((l, i) => (
                       <div key={i}>{l}</div>

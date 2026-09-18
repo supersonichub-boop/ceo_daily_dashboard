@@ -12,7 +12,7 @@
   --color-dashBg: #E9EEF3;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; }
 
 html, body, #root {
   font-family: 'Prompt', sans-serif;
