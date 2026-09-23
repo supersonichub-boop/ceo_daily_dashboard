@@ -18,6 +18,10 @@
     td { text-align: right; }
     td.text-left   { text-align: left; }
     td.text-center { text-align: center; }
+    /* กราฟ 2 ช่อง: เขียน CSS เอง (ไม่ใช้ Tailwind) ให้ความกว้างพร้อมก่อน Chart.js วาด */
+    .md-charts { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    .md-charts > * { min-width: 0; }
+    @media (min-width: 768px) { .md-charts { grid-template-columns: 1fr 1fr; } }
   </style>
 
   <!-- ข้อมูล: แก้ที่ data/md-loan-data.js อย่างเดียว -->
@@ -45,8 +49,8 @@
 
     <!-- SSB & Reserve (คู่กันบนจอใหญ่) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div data-component="components/md-loan/table-ssb.html"></div>
-      <div data-component="components/md-loan/table-reserve.html"></div>
+      <div class="min-w-0" data-component="components/md-loan/table-ssb.html"></div>
+      <div class="min-w-0" data-component="components/md-loan/table-reserve.html"></div>
     </div>
 
   </div>

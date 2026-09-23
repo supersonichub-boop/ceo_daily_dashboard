@@ -1,12 +1,12 @@
 <!-- Charts: ยอดที่นับในยอดรวม (bar) + สัดส่วนยอดคงเหลือ (doughnut) -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-  <div class="bg-white p-6 rounded-xl shadow-sm">
+<div class="md-charts">
+  <div class="bg-white p-4 sm:p-6 rounded-xl shadow-sm min-w-0">
     <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">กราฟสรุปยอดเงินยืมสำรองจ่าย (ตามรายการสรุปสุทธิ)</h3>
-    <div class="relative h-64"><canvas id="summaryBarChart"></canvas></div>
+    <div class="relative h-64 w-full overflow-hidden"><canvas id="summaryBarChart"></canvas></div>
   </div>
-  <div class="bg-white p-6 rounded-xl shadow-sm">
+  <div class="bg-white p-4 sm:p-6 rounded-xl shadow-sm min-w-0">
     <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">สัดส่วนยอดคงเหลือสุทธิ (รวมทุกรายการ)</h3>
-    <div class="relative h-64"><canvas id="balancePieChart"></canvas></div>
+    <div class="relative h-64 w-full overflow-hidden"><canvas id="balancePieChart"></canvas></div>
   </div>
 </div>
 
@@ -57,7 +57,7 @@
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { position: 'right' },
+        legend: { position: window.innerWidth < 640 ? 'bottom' : 'right' },
         tooltip: { callbacks: { label: ctx => ' ยอดคงเหลือ:' + money(ctx.raw) } }
       }
     }
