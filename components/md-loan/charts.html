@@ -16,17 +16,16 @@
   const all = MD_LOAN_CALC.companies;
   const money = v => ' ' + fmtMoney(v || 0) + ' บาท';
 
-  // 1. Bar — เฉพาะบริษัทที่นับเข้ายอดรวม
-  const inTotal = all.filter(c => c.totalMode !== 'none');
+  // 1. Bar — ยอดคงเหลือแต่ละบริษัท
   new Chart(document.getElementById('summaryBarChart'), {
     type: 'bar',
     data: {
-      labels: inTotal.map(c => c.totalMode === 'month' ? `${c.name} (เฉพาะที่ยืมเพิ่ม)` : c.name),
+      labels: all.map(c => c.name),
       datasets: [{
         label: 'ยอดเงิน (บาท)',
-        data: inTotal.map(c => c.counted),
-        backgroundColor: inTotal.map(c => `rgba(${c.chartRgb}, 0.7)`),
-        borderColor: inTotal.map(c => `rgb(${c.chartRgb})`),
+        data: all.map(c => c.balance),
+        backgroundColor: all.map(c => `rgba(${c.chartRgb}, 0.7)`),
+        borderColor: all.map(c => `rgb(${c.chartRgb})`),
         borderWidth: 1,
         borderRadius: 4
       }]

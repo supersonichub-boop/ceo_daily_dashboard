@@ -12,10 +12,7 @@
  *  ขึ้นเดือนใหม่: เปลี่ยน month แล้วเอา Balance รวมสุทธิของเดือนก่อน
  *  มาใส่ carryOver และล้าง transactions ให้ว่าง
  *
- *  totalMode = วิธีนับเข้า "ยอดรวมสุทธิ" ด้านบน
- *    "balance" → นับยอดคงเหลือทั้งหมด
- *    "month"   → นับเฉพาะยอดสุทธิที่ยืมเพิ่มในเดือนนี้
- *    "none"    → ไม่นับรวม
+ *  ยอดรวมสุทธิ = ยอดคงเหลือ (Balance) ของทุกบริษัทรวมกัน
  */
 const MD_LOAN_DATA = {
 
@@ -27,7 +24,6 @@ const MD_LOAN_DATA = {
       key: "QFC",
       name: "QFC",
       color: "blue",  headBg: "#1e3a8a",  chartRgb: "59, 130, 246",
-      totalMode: "balance",
       carryOver: 915400.00,
       transactions: [
         { date: "3/8/69",  lent: 5000.00 },
@@ -50,7 +46,6 @@ const MD_LOAN_DATA = {
       key: "NZN",
       name: "NZN",
       color: "purple",  headBg: "#6b21a8",  chartRgb: "168, 85, 247",
-      totalMode: "month",
       carryOver: 1501149.32,
       transactions: [
         { date: "14/8/69", lent: 15000.00 },
@@ -64,7 +59,6 @@ const MD_LOAN_DATA = {
       key: "SSB",
       name: "SSB",
       color: "teal",  headBg: "#0f766e",  chartRgb: "20, 184, 166",
-      totalMode: "balance",
       carryOver: 953075.61,
       transactions: []
     },
@@ -72,7 +66,6 @@ const MD_LOAN_DATA = {
       key: "RESERVE",
       name: "Company Reserve",
       color: "orange",  headBg: "#c2410c",  chartRgb: "249, 115, 22",
-      totalMode: "none",
       carryOver: 26000.00,
       transactions: []
     }
@@ -115,15 +108,12 @@ const MD_LOAN_CALC = (() => {
     const monthRepaid = sum(c.transactions, "repaid");
     const monthNet    = r2(monthLent - monthRepaid);
     const balance     = r2(c.carryOver + monthNet);
-    const counted     = c.totalMode === "balance" ? balance
-                      : c.totalMode === "month"   ? monthNet
-                      : 0;
 
-    return { ...c, rows, monthLent, monthRepaid, monthNet, balance, counted,
+    return { ...c, rows, monthLent, monthRepaid, monthNet, balance,
              totalLent: r2(c.carryOver + monthLent) };
   });
 
-  const grandTotal = r2(companies.reduce((s, c) => s + c.counted, 0));
+  const grandTotal = r2(companies.reduce((s, c) => s + c.balance, 0));
 
   return { labels, companies, grandTotal };
 })();

@@ -16,15 +16,12 @@
 
 <script>
 (() => {
-  const NOTE = { month: ' (เฉพาะที่ยืมเพิ่มเดือนนี้)', none: ' (ไม่นับรวม)', balance: '' };
-
   const rows = MD_LOAN_CALC.companies.map(c => {
     const label = c.key === 'RESERVE' ? `รวม ${c.name}` : `รวม ${c.name} ยืม MD สำรองจ่าย`;
-    const excluded = c.totalMode === 'none';
     return `
-      <tr class="hover:bg-gray-50 ${excluded ? 'text-gray-400' : ''}">
-        <td class="px-4 py-3 text-left font-medium">${label}<span class="text-xs text-gray-400">${NOTE[c.totalMode]}</span></td>
-        <td class="px-4 py-3 font-semibold ${excluded ? 'line-through' : 'text-blue-600'}">${fmtMoney(excluded ? c.balance : c.counted)}</td>
+      <tr class="hover:bg-gray-50">
+        <td class="px-4 py-3 text-left font-medium">${label}</td>
+        <td class="px-4 py-3 text-blue-600 font-semibold">${fmtMoney(c.balance)}</td>
       </tr>`;
   }).join('');
 
