@@ -1,0 +1,37 @@
+<!-- Summary: ยอดรวมแต่ละบริษัท → ยอดรวมสุทธิ -->
+<div class="bg-white p-6 rounded-xl shadow-sm">
+  <h2 class="text-xl font-semibold text-blue-800 mb-4 border-b pb-2">สรุปยอดรวม (Summary)</h2>
+  <div class="table-container">
+    <table class="w-full text-sm">
+      <thead>
+        <tr>
+          <th class="px-4 py-3 text-left">รายการ</th>
+          <th class="px-4 py-3 text-right">จำนวนเงิน (บาท)</th>
+        </tr>
+      </thead>
+      <tbody id="md-summary-body" class="divide-y divide-gray-200 bg-white"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+(() => {
+  const NOTE = { month: ' (เฉพาะที่ยืมเพิ่มเดือนนี้)', none: ' (ไม่นับรวม)', balance: '' };
+
+  const rows = MD_LOAN_CALC.companies.map(c => {
+    const label = c.key === 'RESERVE' ? `รวม ${c.name}` : `รวม ${c.name} ยืม MD สำรองจ่าย`;
+    const excluded = c.totalMode === 'none';
+    return `
+      <tr class="hover:bg-gray-50 ${excluded ? 'text-gray-400' : ''}">
+        <td class="px-4 py-3 text-left font-medium">${label}<span class="text-xs text-gray-400">${NOTE[c.totalMode]}</span></td>
+        <td class="px-4 py-3 font-semibold ${excluded ? 'line-through' : 'text-blue-600'}">${fmtMoney(excluded ? c.balance : c.counted)}</td>
+      </tr>`;
+  }).join('');
+
+  document.getElementById('md-summary-body').innerHTML = rows + `
+    <tr class="bg-blue-50 font-bold">
+      <td class="px-4 py-4 text-left text-blue-900">ยอดรวมสุทธิ</td>
+      <td class="px-4 py-4 text-blue-900 text-lg border-t-2 border-blue-900">${fmtMoney(MD_LOAN_CALC.grandTotal)}</td>
+    </tr>`;
+})();
+</script>

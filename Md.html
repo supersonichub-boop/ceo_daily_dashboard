@@ -1,406 +1,81 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รายการสรุปเงินยืม MD ประจำเดือน 08/2569</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Prompt', sans-serif;
-            background-color: #f3f4f6;
-        }
-        .table-container {
-            overflow-x: auto;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        th {
-            background-color: #1e3a8a;
-            color: white;
-            font-weight: 500;
-            text-align: center;
-        }
-        td {
-            text-align: right;
-        }
-        td.text-left {
-            text-align: left;
-        }
-        td.text-center {
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายการสรุปเงินยืม MD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Prompt', sans-serif; background-color: #f3f4f6; }
+    .table-container {
+      overflow-x: auto;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+    }
+    th { background-color: #1e3a8a; color: white; font-weight: 500; text-align: center; }
+    td { text-align: right; }
+    td.text-left   { text-align: left; }
+    td.text-center { text-align: center; }
+  </style>
+
+  <!-- ข้อมูล: แก้ที่ data/md-loan-data.js อย่างเดียว -->
+  <script src="data/md-loan-data.js"></script>
+  <script src="components/md-loan/company-table.js"></script>
 </head>
 <body class="text-gray-800 p-4 md:p-8">
 
-    <div class="max-w-7xl mx-auto space-y-8">
+  <div class="max-w-7xl mx-auto space-y-8">
 
-        <a href="index.html"
-           class="inline-flex items-center gap-2 px-4 py-2 bg-[#0B1E36] text-white rounded-xl text-sm font-semibold shadow-sm hover:bg-[#162D4A]">
-            ⬅ Dashboard
-        </a>
+    <a href="index.html"
+       class="inline-flex items-center gap-2 px-4 py-2 bg-[#0B1E36] text-white rounded-xl text-sm font-semibold shadow-sm hover:bg-[#162D4A]">
+      ⬅ Dashboard
+    </a>
 
-        <!-- Header -->
-        <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-600 flex flex-col md:flex-row justify-between items-center">
-            <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-blue-900">รายการสรุปเงินยืม MD</h1>
-                <p class="text-gray-500 mt-1">ประจำเดือน สิงหาคม 2569 (08/2569)</p>
-            </div>
-            <div class="mt-4 md:mt-0 bg-blue-50 px-6 py-3 rounded-lg text-center border border-blue-100">
-                <p class="text-sm text-blue-600 font-semibold">ยอดรวมสุทธิ (ตามสรุป)</p>
-                <p class="text-2xl font-bold text-blue-900">2,177,975.61 <span class="text-sm font-normal">บาท</span></p>
-            </div>
-        </div>
+    <div data-component="components/md-loan/header.html"></div>
+    <div data-component="components/md-loan/charts.html"></div>
+    <div data-component="components/md-loan/summary.html"></div>
 
-        <!-- Charts Section -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Bar Chart -->
-            <div class="bg-white p-6 rounded-xl shadow-sm">
-                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">กราฟสรุปยอดเงินยืมสำรองจ่าย (ตามรายการสรุปสุทธิ)</h3>
-                <div class="relative h-64">
-                    <canvas id="summaryBarChart"></canvas>
-                </div>
-            </div>
-            <!-- Doughnut Chart -->
-            <div class="bg-white p-6 rounded-xl shadow-sm">
-                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">สัดส่วนยอดคงเหลือสุทธิ (รวมทุกรายการ)</h3>
-                <div class="relative h-64">
-                    <canvas id="balancePieChart"></canvas>
-                </div>
-            </div>
-        </div>
+    <hr class="border-gray-300 my-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">รายละเอียดตารางเงินยืมแต่ละบริษัท</h2>
 
-        <!-- Summary Table -->
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-            <h2 class="text-xl font-semibold text-blue-800 mb-4 border-b pb-2">สรุปยอดรวม (Summary)</h2>
-            <div class="table-container">
-                <table class="w-full text-sm">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-3 text-left">รายการ</th>
-                            <th class="px-4 py-3 text-right">จำนวนเงิน (บาท)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 bg-white">
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 text-left font-medium">รวม SSB ยืม MD สํารองจ่าย</td>
-                            <td class="px-4 py-3 text-blue-600 font-semibold">953,075.61</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 text-left font-medium">รวม NZN ยืม MD สํารองจ่าย</td>
-                            <td class="px-4 py-3 text-blue-600 font-semibold">39,000.00</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 text-left font-medium">รวม QFC ยืม MD สํารองจ่าย</td>
-                            <td class="px-4 py-3 text-blue-600 font-semibold">1,185,900.00</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 text-left font-medium">รวม Company Reserve</td>
-                            <td class="px-4 py-3 text-blue-600 font-semibold">26,000.00</td>
-                        </tr>
-                        <tr class="bg-blue-50 font-bold">
-                            <td class="px-4 py-4 text-left text-blue-900">ยอดรวมสุทธิ</td>
-                            <td class="px-4 py-4 text-blue-900 text-lg border-t-2 border-blue-900">2,177,975.61</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div data-component="components/md-loan/table-qfc.html"></div>
+    <div data-component="components/md-loan/table-nzn.html"></div>
 
-        <hr class="border-gray-300 my-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">รายละเอียดตารางเงินยืมแต่ละบริษัท</h2>
-
-        <!-- Table 1: QFC (Most Active) -->
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-            <h3 class="text-lg font-semibold text-blue-700 mb-4 flex items-center">
-                <span class="w-2 h-6 bg-blue-500 rounded mr-3"></span> เงินยืม MD-QFC 08/2569
-            </h3>
-            <div class="table-container">
-                <table class="w-full text-sm whitespace-nowrap">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-3 w-24">Date</th>
-                            <th class="px-4 py-3 text-left">Description</th>
-                            <th class="px-4 py-3">Amount Lent</th>
-                            <th class="px-4 py-3">Amount Repaid</th>
-                            <th class="px-4 py-3">Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr class="bg-blue-50">
-                            <td class="px-4 py-2 text-center text-gray-500">-</td>
-                            <td class="px-4 py-2 text-left text-gray-600 font-medium">ยอดยกมา (07/69)</td>
-                            <td class="px-4 py-2 text-red-500">915,400.00</td>
-                            <td class="px-4 py-2"></td>
-                            <td class="px-4 py-2 font-semibold">915,400.00</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">3/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">5,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">920,400.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">6/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">2,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">922,400.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">6/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">6,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">928,400.00</td></tr>
-                        <tr class="hover:bg-gray-50 bg-green-50"><td class="px-4 py-2 text-center">10/8/69</td><td class="px-4 py-2 text-left text-green-700">คืนแล้ว</td><td class="px-4 py-2"></td><td class="px-4 py-2 text-green-600">10,000.00</td><td class="px-4 py-2">918,400.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">15/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">2,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">920,400.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">17/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">2,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">922,400.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">19/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">4,500.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">926,900.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">24/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">5,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">931,900.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">25/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">2,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">933,900.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">26/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">2,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">935,900.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">28/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">2,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">937,900.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">29/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">150,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">1,087,900.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">29/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">80,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">1,167,900.00</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">31/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">18,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">1,185,900.00</td></tr>
-                        
-                        <tr class="bg-gray-100 font-medium">
-                            <td class="px-4 py-2 text-center"></td>
-                            <td class="px-4 py-2 text-center">รวม</td>
-                            <td class="px-4 py-2 text-red-600">280,500.00</td>
-                            <td class="px-4 py-2 text-green-600">10,000.00</td>
-                            <td class="px-4 py-2">270,500.00</td>
-                        </tr>
-                        <tr class="bg-blue-100 font-bold text-blue-900 border-t-2 border-blue-300">
-                            <td class="px-4 py-3 text-center"></td>
-                            <td class="px-4 py-3 text-center">รวมสุทธิ</td>
-                            <td class="px-4 py-3">1,195,900.00</td>
-                            <td class="px-4 py-3">10,000.00</td>
-                            <td class="px-4 py-3">1,185,900.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Table 2: NZ -->
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-            <h3 class="text-lg font-semibold text-purple-700 mb-4 flex items-center">
-                <span class="w-2 h-6 bg-purple-500 rounded mr-3"></span> เงินยืม MD-NZ 08/2569
-            </h3>
-            <div class="table-container">
-                <table class="w-full text-sm whitespace-nowrap">
-                    <thead>
-                        <tr style="background-color: #6b21a8;">
-                            <th class="px-4 py-3 w-24">Date</th>
-                            <th class="px-4 py-3 text-left">Description</th>
-                            <th class="px-4 py-3">Amount Lent</th>
-                            <th class="px-4 py-3">Amount Repaid</th>
-                            <th class="px-4 py-3">Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr class="bg-purple-50">
-                            <td class="px-4 py-2 text-center text-gray-500">-</td>
-                            <td class="px-4 py-2 text-left text-gray-600 font-medium">ยอดยกมา (07/69)</td>
-                            <td class="px-4 py-2">1,501,149.32</td>
-                            <td class="px-4 py-2"></td>
-                            <td class="px-4 py-2 font-semibold">1,501,149.32</td>
-                        </tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">14/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">15,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">1,516,149.32</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">15/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">5,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">1,521,149.32</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">17/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">2,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">1,523,149.32</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">25/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">2,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">1,525,149.32</td></tr>
-                        <tr class="hover:bg-gray-50"><td class="px-4 py-2 text-center">31/8/69</td><td class="px-4 py-2 text-left">เงินสำรองจ่าย</td><td class="px-4 py-2 text-red-500">15,000.00</td><td class="px-4 py-2"></td><td class="px-4 py-2">1,540,149.32</td></tr>
-                        
-                        <tr class="bg-gray-100 font-medium">
-                            <td class="px-4 py-2 text-center"></td>
-                            <td class="px-4 py-2 text-center">รวม</td>
-                            <td class="px-4 py-2 text-red-600">39,000.00</td>
-                            <td class="px-4 py-2"></td>
-                            <td class="px-4 py-2">39,000.00</td>
-                        </tr>
-                        <tr class="bg-purple-100 font-bold text-purple-900 border-t-2 border-purple-300">
-                            <td class="px-4 py-3 text-center"></td>
-                            <td class="px-4 py-3 text-center">รวมสุทธิ</td>
-                            <td class="px-4 py-3">1,540,149.32</td>
-                            <td class="px-4 py-3"></td>
-                            <td class="px-4 py-3">1,540,149.32</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Table 3: SSB & Reserve (Side by Side on Large Screens) -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
-            <!-- SSB -->
-            <div class="bg-white p-6 rounded-xl shadow-sm">
-                <h3 class="text-lg font-semibold text-teal-700 mb-4 flex items-center">
-                    <span class="w-2 h-6 bg-teal-500 rounded mr-3"></span> เงินยืม MD-SSB 08/2569
-                </h3>
-                <div class="table-container">
-                    <table class="w-full text-sm whitespace-nowrap">
-                        <thead>
-                            <tr style="background-color: #0f766e;">
-                                <th class="px-4 py-3 text-left">Date</th>
-                                <th class="px-4 py-3 text-left">Description</th>
-                                <th class="px-4 py-3">Amount Lent</th>
-                                <th class="px-4 py-3">Amount Repaid</th>
-                                <th class="px-4 py-3">Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200">
-                            <tr class="bg-teal-50">
-                                <td class="px-4 py-3 text-left text-gray-500">-</td>
-                                <td class="px-4 py-3 text-left text-gray-600 font-medium">ยอดยกมา (07/69)</td>
-                                <td class="px-4 py-3">953,075.61</td>
-                                <td class="px-4 py-3"></td>
-                                <td class="px-4 py-3 font-semibold">953,075.61</td>
-                            </tr>
-                            <tr class="bg-teal-100 font-bold text-teal-900 border-t-2 border-teal-300">
-                                <td class="px-4 py-3 text-center"></td>
-                                <td class="px-4 py-3 text-center">รวม / รวมสุทธิ</td>
-                                <td class="px-4 py-3">953,075.61</td>
-                                <td class="px-4 py-3"></td>
-                                <td class="px-4 py-3">953,075.61</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Company Reserve -->
-            <div class="bg-white p-6 rounded-xl shadow-sm">
-                <h3 class="text-lg font-semibold text-orange-700 mb-4 flex items-center">
-                    <span class="w-2 h-6 bg-orange-500 rounded mr-3"></span> เงินยืม MD-Company Reserve
-                </h3>
-                <div class="table-container">
-                    <table class="w-full text-sm whitespace-nowrap">
-                        <thead>
-                            <tr style="background-color: #c2410c;">
-                                <th class="px-4 py-3 text-left">Date</th>
-                                <th class="px-4 py-3 text-left">Description</th>
-                                <th class="px-4 py-3">Amount Lent</th>
-                                <th class="px-4 py-3">Amount Repaid</th>
-                                <th class="px-4 py-3">Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200">
-                            <tr class="bg-orange-50">
-                                <td class="px-4 py-3 text-left text-gray-500">-</td>
-                                <td class="px-4 py-3 text-left text-gray-600 font-medium">ยอดยกมา (07/69)</td>
-                                <td class="px-4 py-3">26,000.00</td>
-                                <td class="px-4 py-3"></td>
-                                <td class="px-4 py-3 font-semibold">26,000.00</td>
-                            </tr>
-                            <!-- <tr class="bg-gray-100 font-medium">
-                                <td class="px-4 py-2 text-center"></td>
-                                <td class="px-4 py-2 text-center">รวม</td>
-                                <td class="px-4 py-2">26,000.00</td>
-                                 <td class="px-4 py-3">-</td>
-                                <td class="px-4 py-3">26,000.00</td>
-                                <td class="px-4 py-2"></td>
-                            </tr> -->
-                            <tr class="bg-orange-100 font-bold text-orange-900 border-t-2 border-orange-300">
-                                <td class="px-4 py-3 text-center"></td>
-                                <td class="px-4 py-3 text-center">รวม / รวมสุทธิ</td>
-                                <td class="px-4 py-3">26,000.00</td>
-                                <td class="px-4 py-3"></td>
-                                <td class="px-4 py-3">26,000.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-
+    <!-- SSB & Reserve (คู่กันบนจอใหญ่) -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div data-component="components/md-loan/table-ssb.html"></div>
+      <div data-component="components/md-loan/table-reserve.html"></div>
     </div>
 
-    <!-- Scripts for Charts -->
-    <script>
-        // Data Configuration
-        Chart.defaults.font.family = "'Prompt', sans-serif";
+  </div>
 
-        // 1. Bar Chart (อิงตามยอดสรุปสุทธิใน PDF)
-        const barCtx = document.getElementById('summaryBarChart').getContext('2d');
-        new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: ['SSB', 'NZN (เฉพาะที่ยืมเพิ่ม)', 'QFC'],
-                datasets: [{
-                    label: 'ยอดเงิน (บาท)',
-                    data: [953075.61, 39000.00, 1185900.00],
-                    backgroundColor: [
-                        'rgba(20, 184, 166, 0.7)', // Teal
-                        'rgba(168, 85, 247, 0.7)', // Purple
-                        'rgba(59, 130, 246, 0.7)'  // Blue
-                    ],
-                    borderColor: [
-                        'rgb(15, 118, 110)',
-                        'rgb(126, 34, 206)',
-                        'rgb(29, 78, 216)'
-                    ],
-                    borderWidth: 1,
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let value = context.raw || 0;
-                                return ' ' + value.toLocaleString('th-TH', {minimumFractionDigits: 2}) + ' บาท';
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return value.toLocaleString('th-TH');
-                            }
-                        }
-                    }
-                }
-            }
-        });
+<script>
+  // โหลดกล่องแต่ละไฟล์ (แบบเดียวกับ index.html)
+  async function loadComponent(el) {
+    const src = el.getAttribute('data-component');
+    try {
+      const html = await (await fetch(src)).text();
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      const scripts = [...tmp.querySelectorAll('script')];
+      scripts.forEach(s => s.remove());
+      el.innerHTML = tmp.innerHTML;
+      scripts.forEach(s => {
+        const ns = document.createElement('script');
+        ns.textContent = s.textContent;
+        document.body.appendChild(ns);
+      });
+    } catch (e) {
+      el.innerHTML = `<div style="color:#f87171;font-size:11px;padding:6px;">⚠ โหลด ${src} ไม่สำเร็จ</div>`;
+    }
+  }
 
-        // 2. Doughnut Chart (ยอดคงเหลือ Balance ปัจจุบันของทุกบริษัท)
-        // SSB: 953,075.61 | NZ: 1,540,149.32 | QFC: 1,185,900.00 | Reserve: 26,000.00
-        const pieCtx = document.getElementById('balancePieChart').getContext('2d');
-        new Chart(pieCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['SSB', 'NZ', 'QFC', 'Company Reserve'],
-                datasets: [{
-                    data: [953075.61, 1540149.32, 1185900.00, 26000.00],
-                    backgroundColor: [
-                        'rgba(20, 184, 166, 0.8)',
-                        'rgba(168, 85, 247, 0.8)',
-                        'rgba(59, 130, 246, 0.8)',
-                        'rgba(249, 115, 22, 0.8)'
-                    ],
-                    borderWidth: 0,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let value = context.raw || 0;
-                                return ' ยอดคงเหลือ: ' + value.toLocaleString('th-TH', {minimumFractionDigits: 2}) + ' บาท';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    </script>
+  (async () => {
+    for (const p of document.querySelectorAll('[data-component]'))
+      await loadComponent(p);
+  })();
+</script>
 </body>
 </html>
-
-

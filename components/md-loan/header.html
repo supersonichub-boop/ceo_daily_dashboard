@@ -1,0 +1,17 @@
+<!-- Header: ชื่อรายงาน + ยอดรวมสุทธิ -->
+<div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-600 flex flex-col md:flex-row justify-between items-center">
+  <div>
+    <h1 class="text-2xl md:text-3xl font-bold text-blue-900">รายการสรุปเงินยืม MD</h1>
+    <p class="text-gray-500 mt-1">ประจำเดือน <span id="md-period"></span></p>
+  </div>
+  <div class="mt-4 md:mt-0 bg-blue-50 px-6 py-3 rounded-lg text-center border border-blue-100">
+    <p class="text-sm text-blue-600 font-semibold">ยอดรวมสุทธิ (ตามสรุป)</p>
+    <p class="text-2xl font-bold text-blue-900"><span id="md-grand-total"></span> <span class="text-sm font-normal">บาท</span></p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('md-period').textContent = MD_LOAN_CALC.labels.periodTh;
+  document.getElementById('md-grand-total').textContent = fmtMoney(MD_LOAN_CALC.grandTotal);
+  document.title = `รายการสรุปเงินยืม MD ประจำเดือน ${MD_LOAN_CALC.labels.period}`;
+</script>

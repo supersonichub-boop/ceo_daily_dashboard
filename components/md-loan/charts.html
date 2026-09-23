@@ -1,0 +1,67 @@
+<!-- Charts: ยอดที่นับในยอดรวม (bar) + สัดส่วนยอดคงเหลือ (doughnut) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="bg-white p-6 rounded-xl shadow-sm">
+    <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">กราฟสรุปยอดเงินยืมสำรองจ่าย (ตามรายการสรุปสุทธิ)</h3>
+    <div class="relative h-64"><canvas id="summaryBarChart"></canvas></div>
+  </div>
+  <div class="bg-white p-6 rounded-xl shadow-sm">
+    <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">สัดส่วนยอดคงเหลือสุทธิ (รวมทุกรายการ)</h3>
+    <div class="relative h-64"><canvas id="balancePieChart"></canvas></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  Chart.defaults.font.family = "'Prompt', sans-serif";
+  const all = MD_LOAN_CALC.companies;
+  const money = v => ' ' + fmtMoney(v || 0) + ' บาท';
+
+  // 1. Bar — เฉพาะบริษัทที่นับเข้ายอดรวม
+  const inTotal = all.filter(c => c.totalMode !== 'none');
+  new Chart(document.getElementById('summaryBarChart'), {
+    type: 'bar',
+    data: {
+      labels: inTotal.map(c => c.totalMode === 'month' ? `${c.name} (เฉพาะที่ยืมเพิ่ม)` : c.name),
+      datasets: [{
+        label: 'ยอดเงิน (บาท)',
+        data: inTotal.map(c => c.counted),
+        backgroundColor: inTotal.map(c => `rgba(${c.chartRgb}, 0.7)`),
+        borderColor: inTotal.map(c => `rgb(${c.chartRgb})`),
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => money(ctx.raw) } }
+      },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => v.toLocaleString('th-TH') } } }
+    }
+  });
+
+  // 2. Doughnut — ยอดคงเหลือทุกบริษัท
+  new Chart(document.getElementById('balancePieChart'), {
+    type: 'doughnut',
+    data: {
+      labels: all.map(c => c.name),
+      datasets: [{
+        data: all.map(c => c.balance),
+        backgroundColor: all.map(c => `rgba(${c.chartRgb}, 0.8)`),
+        borderWidth: 0,
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right' },
+        tooltip: { callbacks: { label: ctx => ' ยอดคงเหลือ:' + money(ctx.raw) } }
+      }
+    }
+  });
+})();
+</script>
