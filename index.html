@@ -40,8 +40,11 @@
       height: 100vh;
       display: flex;
       align-items: stretch;
-      padding: 10px 200px; /* บนล่าง 10px | ซ้ายขวา 28px */
+      padding: 10px 200px; /* บนล่าง 10px | ซ้ายขวา 200px */
     }
+    /* จอแคบ → ลดขอบซ้ายขวา */
+    @media (max-width: 1400px) { .dash-wrapper { padding: 10px 28px; } }
+    @media (max-width: 768px)  { .dash-wrapper { padding: 6px 6px; } }
 
     /* Card หลัก */
     .dash-card {
@@ -167,6 +170,10 @@
         <a href="weekly-plan.html"
            class="px-3 py-1.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold shadow-sm flex items-center gap-2">
           <i class="fa-solid fa-table-cells"></i> Weekly Plan
+        </a>
+        <a href="Md.html"
+           class="px-3 py-1.5 bg-emerald-600 text-white rounded-xl text-sm font-semibold shadow-sm flex items-center gap-2">
+          <i class="fa-solid fa-hand-holding-dollar"></i> เงินยืม MD
         </a>
       </div>`;
   })();
