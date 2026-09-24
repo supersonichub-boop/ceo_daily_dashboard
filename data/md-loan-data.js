@@ -61,13 +61,6 @@ const MD_LOAN_DATA = {
       color: "teal",  headBg: "#0f766e",  chartRgb: "20, 184, 166",
       carryOver: 953075.61,
       transactions: []
-    },
-    {
-      key: "RESERVE",
-      name: "Company Reserve",
-      color: "orange",  headBg: "#c2410c",  chartRgb: "249, 115, 22",
-      carryOver: 26000.00,
-      transactions: []
     }
   ]
 };

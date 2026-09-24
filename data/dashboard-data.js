@@ -67,7 +67,7 @@ const DASHBOARD_DATA = {
     { title: "บันทึกข้อมูลค่าใช้จ่ายให้ครบและถูกต้อง", status: "amber" },
     // { title: "ค่าใช้จ่ายรอจ่าย 2 บริษัท", status: "green" },
     // { title: "หนังสือไปสภาสถาปนิก", status: "amber" },
-    { title: "ตามเงินค่าเช่าห้องคนงานจากพี่วาสิฏ", status: "amber" },
+    // { title: "ตามเงินค่าเช่าห้องคนงานจากพี่วาสิฏ", status: "amber" },
     // { title: "ตามเงินค่างวดของ Wallaya", status: "green" },
     { title: "ตามเงินของอันดามันแอสเซท เขาแจ้งจะจ่ายกลางเดือน", status: "amber" }
   ],
