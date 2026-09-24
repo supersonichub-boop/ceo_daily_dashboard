@@ -122,6 +122,35 @@ html,body{font-family:'Sarabun','Prompt',sans-serif;background:#f0f4f8;height:10
 .sun .fc{color:#ad1457}
 .sun .nt{border-top:1px solid #f06292;padding-top:3px}
 .sun .ni{background:#f8bbd0}
+
+/* ══════════ RESPONSIVE ══════════ */
+/* Tablet: เลื่อนทั้งหน้า | วันละการ์ด เรียงตามความกว้างจอ | ตัวอักษรใหญ่ขึ้น */
+@media (max-width:1024px){
+  html,body{height:auto;overflow:auto}
+  #app{width:100%;height:auto;min-height:100vh;padding:8px;gap:8px}
+  #grid{flex:none;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;overflow:visible}
+  .dc{height:auto;gap:5px;padding:7px;overflow:visible}
+  .dc .sl:last-of-type{flex:none}
+  .dn{font-size:16px}.dt{font-size:12px}
+  .tm{font-size:12px}
+  .badge{font-size:10px}
+  .sl li,.sl .tx,.sl .fc{font-size:12px}
+  .sl .si{font-size:11px}
+  .sub-note{font-size:10px}
+  .ni .ntt{font-size:10px}.ni .nta{font-size:11px}
+  .wp-header .sub{font-size:12px}
+  .kp-wrap{grid-template-columns:1fr 1fr}
+  .kp-title{grid-column:1/-1;font-size:12px}
+  .kp-label{font-size:12px}.kp-sub{font-size:11px}
+}
+/* Mobile: ปุ่มกลับอยู่ใต้หัวข้อ | footer คอลัมน์เดียว */
+@media (max-width:640px){
+  #grid{grid-template-columns:1fr}
+  .wp-header{padding:10px 12px}
+  .wp-header h1{font-size:17px}
+  .nav-btn{position:static;transform:none;display:inline-block;margin-top:8px;font-size:12px}
+  .kp-wrap{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>

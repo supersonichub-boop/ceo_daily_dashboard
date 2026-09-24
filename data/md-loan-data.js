@@ -12,6 +12,9 @@
  *  ขึ้นเดือนใหม่: เปลี่ยน month แล้วเอา Balance รวมสุทธิของเดือนก่อน
  *  มาใส่ carryOver และล้าง transactions ให้ว่าง
  *
+ *  ยอดยกมาไม่ใช่เดือนก่อน → ใส่ carryOverMonth (และ carryOverYear ถ้าข้ามปี)
+ *    เช่น carryOverMonth: 5  → แสดง "ยอดยกมา (05/69)"
+ *
  *  ยอดรวมสุทธิ = ยอดคงเหลือ (Balance) ของทุกบริษัทรวมกัน
  */
 const MD_LOAN_DATA = {
@@ -61,13 +64,6 @@ const MD_LOAN_DATA = {
       color: "teal",  headBg: "#0f766e",  chartRgb: "20, 184, 166",
       carryOver: 953075.61,
       transactions: []
-    },
-    {
-      key: "RESERVE",
-      name: "Company Reserve",
-      color: "orange",  headBg: "#c2410c",  chartRgb: "249, 115, 22",
-      carryOver: 26000.00,
-      transactions: []
     }
   ]
 };
@@ -84,10 +80,12 @@ const MD_LOAN_CALC = (() => {
   const prevMonth = d.month === 1 ? 12 : d.month - 1;
   const prevYear  = d.month === 1 ? d.year - 1 : d.year;
 
+  const carryOverLabel = (m, y) => `ยอดยกมา (${String(m).padStart(2, "0")}/${String(y).slice(-2)})`;
+
   const labels = {
     period:    `${mm}/${d.year}`,                                      // 08/2569
     periodTh:  `${MONTHS[d.month - 1]} ${d.year} (${mm}/${d.year})`,   // สิงหาคม 2569 (08/2569)
-    carryOver: `ยอดยกมา (${String(prevMonth).padStart(2, "0")}/${String(prevYear).slice(-2)})`
+    carryOver: carryOverLabel(prevMonth, prevYear)                     // ยอดยกมา (07/69)
   };
 
   const companies = d.companies.map(c => {
@@ -109,7 +107,11 @@ const MD_LOAN_CALC = (() => {
     const monthNet    = r2(monthLent - monthRepaid);
     const balance     = r2(c.carryOver + monthNet);
 
-    return { ...c, rows, monthLent, monthRepaid, monthNet, balance,
+    const coLabel = c.carryOverMonth
+      ? carryOverLabel(c.carryOverMonth, c.carryOverYear || d.year)
+      : labels.carryOver;
+
+    return { ...c, rows, monthLent, monthRepaid, monthNet, balance, carryOverLabel: coLabel,
              totalLent: r2(c.carryOver + monthLent) };
   });
 
