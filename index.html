@@ -42,10 +42,6 @@
       align-items: stretch;
       padding: 10px 200px; /* บนล่าง 10px | ซ้ายขวา 200px */
     }
-    /* จอแคบ → ลดขอบซ้ายขวา */
-    @media (max-width: 1400px) { .dash-wrapper { padding: 10px 28px; } }
-    @media (max-width: 768px)  { .dash-wrapper { padding: 6px 6px; } }
-
     /* Card หลัก */
     .dash-card {
       flex: 1;
@@ -101,6 +97,30 @@
     .animate-fade-in    { animation: fadeIn 0.5s ease-out forwards; }
     .animate-pulse-glow { animation: pulseGlow 2s infinite ease-in-out; }
     .progress-bar-fill  { transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+    /* ── RESPONSIVE ───────────────────────────────── */
+    /* Notebook: ลดขอบซ้ายขวา */
+    @media (max-width: 1400px) { .dash-wrapper { padding: 10px 28px; } }
+
+    /* Tablet: เลื่อนทั้งหน้าแทนเลื่อนในคอลัมน์ | 2 คอลัมน์ + ความเสี่ยง/ตัดสินใจเต็มแถว */
+    @media (max-width: 1024px) {
+      html, body   { height: auto; overflow: auto; }
+      .dash-wrapper { height: auto; min-height: 100vh; padding: 8px; }
+      .dash-card   { overflow: visible; }
+      .dash-main   { grid-template-columns: 1fr 1fr; overflow: visible; }
+      .dash-col    { overflow: visible; }
+      .dash-col:nth-child(3) { grid-column: 1 / -1; }
+      .kpi-grid    { grid-template-columns: repeat(3, 1fr) !important; }
+    }
+
+    /* Mobile: คอลัมน์เดียว */
+    @media (max-width: 640px) {
+      .dash-wrapper { padding: 0; }
+      .dash-card   { border-radius: 0; border: none; }
+      .dash-main   { grid-template-columns: 1fr; }
+      .dash-col:nth-child(3) { grid-column: auto; }
+      .kpi-grid    { grid-template-columns: repeat(2, 1fr) !important; }
+      .kpi-grid > :first-child { grid-column: 1 / -1; }
+    }
   </style>
 
   <script src="data/dashboard-data.js"></script>
@@ -162,7 +182,7 @@
         <h1 class="text-2xl sm:text-3xl font-bold tracking-wider">CEO DAILY DASHBOARD</h1>
       </div>
       <div class="text-sky-300 text-xs sm:text-sm font-light text-center">${d.motto}</div>
-      <div class="flex items-center gap-2">
+      <div class="flex flex-wrap justify-center items-center gap-2">
         <div class="bg-[#162D4A] px-3 py-1 rounded-md border border-slate-600/50 flex items-center gap-2 text-sm font-semibold">
           <i class="fa-regular fa-calendar-days text-sky-400"></i>
           <span>${getThaiDateToday()}</span>

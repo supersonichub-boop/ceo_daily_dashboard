@@ -39,7 +39,7 @@ function renderMdLoanTable(key, el) {
     </tr>` : '';
 
   el.innerHTML = `
-    <div class="bg-white p-6 rounded-xl shadow-sm h-full">
+    <div class="bg-white p-4 sm:p-6 rounded-xl shadow-sm h-full min-w-0">
       <h3 class="text-lg font-semibold text-${col}-700 mb-4 flex items-center">
         <span class="w-2 h-6 bg-${col}-500 rounded mr-3"></span> ${title}
       </h3>
@@ -57,7 +57,7 @@ function renderMdLoanTable(key, el) {
           <tbody class="divide-y divide-gray-200">
             <tr class="bg-${col}-50">
               <td class="px-4 py-2 text-center text-gray-500">-</td>
-              <td class="px-4 py-2 text-left text-gray-600 font-medium">${MD_LOAN_CALC.labels.carryOver}</td>
+              <td class="px-4 py-2 text-left text-gray-600 font-medium">${c.carryOverLabel}</td>
               <td class="px-4 py-2">${fmtMoney(c.carryOver)}</td>
               <td class="px-4 py-2"></td>
               <td class="px-4 py-2 font-semibold">${fmtMoney(c.carryOver)}</td>
