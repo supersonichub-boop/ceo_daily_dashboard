@@ -13,7 +13,7 @@
   const rows = risks.map(r => {
     const dot = dotMap[r.level] || "bg-amber-400";
     const overdueHtml = r.overdue
-      ? `<div class="text-right ml-2 shrink-0">
+      ? `<div class="sm:text-right sm:ml-2 shrink-0">
            <span class="text-[10px] text-slate-400">ค้างชำระ:</span>
            <span class="font-bold text-[#9E1A1A]"> ${fmt(r.overdue)} <span class="text-[9px] font-normal">บาท</span></span>
          </div>` : '';
@@ -23,7 +23,7 @@
     return `
       <div class="flex items-start gap-2">
         <span class="w-2.5 h-2.5 rounded-full ${dot} inline-block mt-1 shrink-0"></span>
-        <div class="flex-1 flex justify-between items-start">
+        <div class="flex-1 min-w-0 flex flex-col sm:flex-row sm:justify-between items-start gap-0.5">
           <div>
             <div class="font-bold text-slate-800">${r.title}</div>
             ${detailHtml}

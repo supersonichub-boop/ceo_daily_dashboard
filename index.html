@@ -112,14 +112,39 @@
       .kpi-grid    { grid-template-columns: repeat(3, 1fr) !important; }
     }
 
+    /* กันเนื้อหายาวดันจอให้กว้างเกิน (เลื่อนซ้ายขวา) */
+    .dash-main > *, .dash-col > * { min-width: 0; }
+
     /* Mobile: คอลัมน์เดียว */
     @media (max-width: 640px) {
       .dash-wrapper { padding: 0; }
-      .dash-card   { border-radius: 0; border: none; }
-      .dash-main   { grid-template-columns: 1fr; }
+      .dash-card   { border-radius: 0; border: none; box-shadow: none; }
+      .dash-main   { grid-template-columns: 1fr; gap: 10px; padding: 10px; }
+      .dash-col    { gap: 10px !important; }
       .dash-col:nth-child(3) { grid-column: auto; }
+      .dash-main, .dash-footer { overflow-wrap: anywhere; }
+
+      /* หัว: ชื่อเล็กลงให้อยู่บรรทัดเดียว ปุ่มแตะง่ายขึ้น */
+      #comp-header h1 { font-size: 1.35rem; letter-spacing: .04em; }
+      #comp-header a  { padding: 8px 14px; }
+
+      /* ตัวอักษรเล็กมากให้อ่านได้บนมือถือ */
+      .dash-main .text-\[9px\]  { font-size: 11px; }
+      .dash-main .text-\[10px\] { font-size: 11px; }
+      .dash-main .text-xs       { font-size: 13px; line-height: 1.45; }
+
+      /* ปุ่มอนุมัติ / ชะลอ / ติดตาม สูงพอให้นิ้วกด */
+      #comp-decisions button { padding-top: 10px; padding-bottom: 10px; font-size: 13px; }
+
+      /* KPI: 2 ช่องต่อแถว ตัวอักษรใหญ่ขึ้น */
+      .dash-footer { padding: 10px; }
       .kpi-grid    { grid-template-columns: repeat(2, 1fr) !important; }
-      .kpi-grid > :first-child { grid-column: 1 / -1; }
+      .kpi-grid > :first-child { grid-column: 1 / -1; flex-direction: row !important; gap: 8px; }
+      .kpi-grid > :first-child i { margin-bottom: 0 !important; }
+      .kpi-grid > * > div:first-child { font-size: 11px !important; }
+      .kpi-grid > * > div:nth-child(2) { font-size: 20px !important; }
+      .kpi-grid > * > div:last-child   { font-size: 11px !important; }
+      .kpi-principles { flex-wrap: wrap; gap: 4px 10px !important; font-size: 12px !important; }
     }
   </style>
 
